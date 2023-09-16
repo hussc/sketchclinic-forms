@@ -8,8 +8,8 @@
 import Foundation
 
 extension FormContainer {
-    public convenience init(id: String) {
-        self.init(id: id, version: "", title: "", steps: [])
+    public convenience init(id: String, title: String, version: String = "1", @FormStepContainerBuilder _ steps: () -> [FormStepContainer]) {
+        self.init(id: id, version: version, title: title, steps: steps())
     }
     
     public func title(_ title: String) -> FormContainer {

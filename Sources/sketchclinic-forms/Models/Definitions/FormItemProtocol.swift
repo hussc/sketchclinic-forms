@@ -15,4 +15,6 @@ public protocol FormItemProtocol: Codable, FormTypeIdentifiable {
 
 extension FormItemProtocol {
     public var id: String { title }
+    
+    public var type: String { Self.typeIdentifier }
 }

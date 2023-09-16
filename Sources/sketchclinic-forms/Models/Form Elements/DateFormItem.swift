@@ -14,7 +14,6 @@ public struct DateFormItem: FormItemProtocol {
     public var minDate: Date?
     public var maxDate: Date?
     
-    @EncodeNulls
     public var defaultValue: Date?
     public var value: Date = Date()
     

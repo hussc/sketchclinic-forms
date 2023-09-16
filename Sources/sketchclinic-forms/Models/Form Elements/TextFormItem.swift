@@ -13,9 +13,7 @@ public struct TextFormItem: PlaceholderFormItemProtocol {
     public var placeholder: String
     public var order: Int
     
-    @EncodeNulls
-    public var defaultValue: String?
-    
+    public var defaultValue: String?    
     public var value: String = ""
     
     public static var typeIdentifier: String {

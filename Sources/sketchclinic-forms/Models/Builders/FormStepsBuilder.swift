@@ -55,8 +55,8 @@ public struct FormStepContainerBuilder {
 
 
 extension FormStepContainer {
-    public convenience init(title: String) {
-        self.init(title: title, description: nil, icon: nil, order: 0, fields: [])
+    public convenience init(title: String, description: String? = nil, icon: String? = nil, @FormItemsBuilder _ fields: () -> [FormItemProtocol]) {
+        self.init(title: title, description: description, icon: icon, order: 0, fields: fields())
     }
     
     @discardableResult

@@ -17,12 +17,14 @@ public struct FormChoicesBuilder {
     
     // For groups of items
     public static func buildBlock(_ items: FormChoiceItem...) -> [FormChoiceItem] {
+        var mutableItems: [FormChoiceItem] = []
         for (index, item) in items.enumerated() {
             var mutableItem = item
             mutableItem.order = index + 1
+            mutableItems.append(mutableItem)
         }
         
-        return items
+        return mutableItems
     }
     
     // For optional items
@@ -41,12 +43,14 @@ public struct FormChoicesBuilder {
     
     // For arrays of items
     public static func buildArray(_ components: [FormChoiceItem]) -> [FormChoiceItem] {
+        var mutableItems: [FormChoiceItem] = []
         for (index, item) in components.enumerated() {
             var mutableItem = item
             mutableItem.order = index + 1
+            mutableItems.append(mutableItem)
         }
         
-        return components
+        return mutableItems
     }
     
     // For final result conversion

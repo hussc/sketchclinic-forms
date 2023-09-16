@@ -1,7 +1,7 @@
 import XCTest
-@testable import sketchclinic_forms
+@testable import SketchClinicForms
 
-final class sketchclinic_formsTests: XCTestCase {
+final class SketchClinicFormsTests: XCTestCase {
     func testExample() throws {
         // XCTest Documentation
         // https://developer.apple.com/documentation/xctest

@@ -17,12 +17,14 @@ public struct FormItemsBuilder {
     
     // For groups of items
     public static func buildBlock(_ items: FormItemProtocol...) -> [FormItemProtocol] {
+        var mutableItems: [FormItemProtocol] = []
         for (index, item) in items.enumerated() {
             var mutableItem = item
             mutableItem.order = index + 1
+            mutableItems.append(mutableItem)
         }
         
-        return items
+        return mutableItems
     }
     
     // For optional items
@@ -41,20 +43,41 @@ public struct FormItemsBuilder {
     
     // For arrays of items
     public static func buildArray(_ components: [FormItemProtocol]) -> [FormItemProtocol] {
+        var mutableItems: [FormItemProtocol] = []
         for (index, item) in components.enumerated() {
             var mutableItem = item
             mutableItem.order = index + 1
+            mutableItems.append(mutableItem)
         }
-        return components
+        
+        return mutableItems
     }
     
     // For final result conversion, in this case, we'll just return the items as-is
     public static func buildFinalResult(_ component: [FormItemProtocol]) -> [FormItemProtocol] {
-        return component
+        var mutableItems: [FormItemProtocol] = []
+        for (index, item) in component.enumerated() {
+            var mutableItem = item
+            mutableItem.order = index + 1
+            mutableItems.append(mutableItem)
+        }
+        
+        return mutableItems
     }
     
     public static func buildOptional(_ component: [FormItemProtocol]?) -> [FormItemProtocol] {
-        return component ?? []
+        guard let component else {
+            return []
+        }
+        
+        var mutableItems: [FormItemProtocol] = []
+        for (index, item) in component.enumerated() {
+            var mutableItem = item
+            mutableItem.order = index + 1
+            mutableItems.append(mutableItem)
+        }
+        
+        return mutableItems
     }
     
     public static func buildEither(first component: [FormItemProtocol]) -> [FormItemProtocol] {

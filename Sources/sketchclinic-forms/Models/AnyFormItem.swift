@@ -9,6 +9,7 @@ import Foundation
 
 public struct AnyFormItem: Codable, Identifiable {
     public var item: FormItemProtocol
+    public let type: String
     
     public var id: String {
         item.id
@@ -16,6 +17,7 @@ public struct AnyFormItem: Codable, Identifiable {
     
     public init(item: FormItemProtocol) {
         self.item = item
+        self.type = item.type
     }
     
     public init(from decoder: Decoder) throws {
@@ -26,11 +28,14 @@ public struct AnyFormItem: Codable, Identifiable {
             throw DecodingError.dataCorruptedError(forKey: .type, in: container, debugDescription: "Invalid type-identifier \(typeString), the type wasn't found in the registry, available types: \(FormItemsRegistry.items.map { $0.typeIdentifier })")
         }
         
+        self.type = typeString
         self.item = try type.init(from: decoder)
     }
     
     public func encode(to encoder: Encoder) throws {
         try item.encode(to: encoder)
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(type, forKey: .type)
     }
     
     public enum CodingKeys: String, CodingKey {

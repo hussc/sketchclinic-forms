@@ -16,7 +16,7 @@ open class FormStepContainer: Codable, Equatable {
     @Published public var fields: [AnyFormItem]
     
     public static func == (lhs: FormStepContainer, rhs: FormStepContainer) -> Bool {
-        lhs.title == rhs.title
+        lhs.title == rhs.title && lhs.description == rhs.description && lhs.icon == rhs.icon && lhs.order == rhs.order
     }
     
     public init(title: String, description: String? = nil, icon: String? = nil, order: Int, fields: [FormItemProtocol]) {
@@ -63,7 +63,5 @@ extension FormStepContainer {
 
 #if canImport(SwiftUI)
 import SwiftUI
-extension FormStepContainer: ObservableObject {
-    
-}
+extension FormStepContainer: ObservableObject { }
 #endif
