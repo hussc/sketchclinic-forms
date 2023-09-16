@@ -4,20 +4,29 @@
 import PackageDescription
 
 let package = Package(
-    name: "sketchclinic-forms",
+    name: "SketchClinicForms",
+    platforms: [
+        .iOS(.v16),
+        .macOS(.v13),
+    ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "sketchclinic-forms",
-            targets: ["sketchclinic-forms"]),
+            name: "SketchClinicForms",
+            targets: ["SketchClinicForms"])
+    ],
+    dependencies: [
+        .package(url: "https://github.com/GottaGetSwifty/CodableWrappers.git", .upToNextMajor(from: "2.0.0"))
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "sketchclinic-forms"),
+            name: "SketchClinicForms", dependencies: [
+                .product(name: "CodableWrappers", package: "codablewrappers")
+            ]),
         .testTarget(
-            name: "sketchclinic-formsTests",
-            dependencies: ["sketchclinic-forms"]),
+            name: "SketchClinicFormsTests",
+            dependencies: ["SketchClinicForms"]),
     ]
 )
