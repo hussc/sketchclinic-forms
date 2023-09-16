@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import CodableWrappers
 
 public struct TextFormItem: PlaceholderFormItemProtocol {
     public var title: String

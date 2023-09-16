@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import CodableWrappers
 
 public struct MultipleChoicesFormItem: ChoicesBasedFormItemProtocol {
     public var title: String
