@@ -16,6 +16,7 @@ public struct FormItemsRegistry {
         DateFormItem.self,
         DescriptionFormItem.self,
         NumberFormItem.self,
-        LongTextFormItem.self
+        LongTextFormItem.self,
+        TextListFormItem.self
     ]
 }

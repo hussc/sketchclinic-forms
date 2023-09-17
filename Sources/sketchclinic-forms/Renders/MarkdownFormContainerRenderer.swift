@@ -16,17 +16,11 @@ public protocol MarkdownRenderableFormItemProtocol: FormItemProtocol {
  Note: Markdown text can't be read back once exported
  */
 public struct MarkdownFormContainerRenderer: FormContainerRenderer {
+    public init() { }
+    
     public func render(form: FormContainer) throws -> String {
-        // Form Title -> # Form Title
-        // Form Steps -> ## Step Title
-        // Form Step Description -> > Step Description
-        // Form Step Items -> ForEach:
-            // ### Item Title
-            // > Step Description (if found)
-            // Each item renders on it's own format
-            // if not, we will just skip the step :)
         let title = "# \(form.title)"
-        let steps = form.steps.map { step in
+        let steps = form.steps.compactMap { step in
             let stepTitle = "## \(step.title)\n"
             let stepDescription = step.description.map { "> \($0)" }
             let fields: [String?] = step.fields.map { field in
@@ -36,6 +30,8 @@ public struct MarkdownFormContainerRenderer: FormContainerRenderer {
                 
                 return nil
             }
+            
+            if fields.compactMap({ $0 }).isEmpty { return nil }
             
             return ([stepTitle, stepDescription] + fields.compactMap { $0 }).compactMap { $0 }.joined(separator: "\n")
         }.joined(separator: "\n")
@@ -60,20 +56,22 @@ extension BooleanFormItem: MarkdownRenderableFormItemProtocol {
 
 extension DateFormItem: MarkdownRenderableFormItemProtocol {
     public var markdownText: String? {
-        return "#### \(title): \(value.formatted(.dateTime))"
+        return "#### \(title): \n> **\(value.formatted(.dateTime))**"
     }
 }
 
 extension DescriptionFormItem: MarkdownRenderableFormItemProtocol {
     public var markdownText: String? {
-        var markdown = title.isEmpty ? "" : "#### \(title)\n"
-        markdown += value
-        return markdown
+        return value
     }
 }
 
 extension LongTextFormItem: MarkdownRenderableFormItemProtocol {
     public var markdownText: String? {
+        if value.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            return nil
+        }
+        
         var markdown = title.isEmpty ? "" : "#### \(title)\n"
         markdown += value
         return markdown
@@ -82,6 +80,10 @@ extension LongTextFormItem: MarkdownRenderableFormItemProtocol {
 
 extension TextFormItem: MarkdownRenderableFormItemProtocol {
     public var markdownText: String? {
+        if value.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            return nil
+        }
+        
         var markdown = title.isEmpty ? "" : "#### \(title)\n"
         markdown += value
         return markdown
@@ -107,6 +109,6 @@ extension SingleChoiceFormItem: MarkdownRenderableFormItemProtocol {
 
 extension NumberFormItem: MarkdownRenderableFormItemProtocol {
     public var markdownText: String? {
-        return title.isEmpty ? "" : "#### \(title): **\(value)**"
+        return title.isEmpty ? "" : "#### \(title):\n> **\(value)**"
     }
 }
