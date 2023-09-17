@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct JSONFormContainerRenderer: FormContainerRenderer {
-    func render(form: FormContainer) throws -> Data {
+public struct JSONFormContainerRenderer: FormContainerRenderer {
+    public func render(form: FormContainer) throws -> Data {
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .secondsSince1970
         return try encoder.encode(form)

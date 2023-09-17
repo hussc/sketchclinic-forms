@@ -15,8 +15,8 @@ public protocol MarkdownRenderableFormItemProtocol: FormItemProtocol {
  Renders the contents of the form to Markdown text.
  Note: Markdown text can't be read back once exported
  */
-struct MarkdownFormContainerRenderer: FormContainerRenderer {
-    func render(form: FormContainer) throws -> String {
+public struct MarkdownFormContainerRenderer: FormContainerRenderer {
+    public func render(form: FormContainer) throws -> String {
         // Form Title -> # Form Title
         // Form Steps -> ## Step Title
         // Form Step Description -> > Step Description

@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol FormContainerRenderer {
+public protocol FormContainerRenderer {
     associatedtype Output
     
     func render(form: FormContainer) throws -> Output
