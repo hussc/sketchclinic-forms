@@ -19,7 +19,7 @@ public struct FormStepContainerBuilder {
     public static func buildBlock(_ items: FormStepContainer...) -> [FormStepContainer] {
         // Modify the order property based on the sequence
         for (index, item) in items.enumerated() {
-            item.order = index + 1
+            item.order = index
         }
         return items
     }
@@ -42,7 +42,7 @@ public struct FormStepContainerBuilder {
     public static func buildArray(_ components: [FormStepContainer]) -> [FormStepContainer] {
         // Modify the order property based on the sequence
         for (index, item) in components.enumerated() {
-            item.order = index + 1
+            item.order = index
         }
         return components
     }

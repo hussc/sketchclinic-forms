@@ -6,3 +6,17 @@
 //
 
 import Foundation
+import XCTest
+@testable import SketchClinicForms
+
+class MarkdownRendererTests: XCTestCase {
+    func testMarkdownRendering() throws {
+        let form = constructSampleForm()
+        
+        let renderer = MarkdownFormContainerRenderer()
+        let output = try renderer.render(form: form)
+        
+        print(output)
+    }
+}
+

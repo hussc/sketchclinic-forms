@@ -20,7 +20,7 @@ public struct FormChoicesBuilder {
         var mutableItems: [FormChoiceItem] = []
         for (index, item) in items.enumerated() {
             var mutableItem = item
-            mutableItem.order = index + 1
+            mutableItem.order = index
             mutableItems.append(mutableItem)
         }
         
@@ -46,7 +46,7 @@ public struct FormChoicesBuilder {
         var mutableItems: [FormChoiceItem] = []
         for (index, item) in components.enumerated() {
             var mutableItem = item
-            mutableItem.order = index + 1
+            mutableItem.order = index
             mutableItems.append(mutableItem)
         }
         

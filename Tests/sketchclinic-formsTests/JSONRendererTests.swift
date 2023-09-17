@@ -4,7 +4,7 @@ import XCTest
 
 final class JSONRendererTests: XCTestCase {
     func testJSONRendering() throws {
-        let form = constructSampleForm()
+        let form = constructStandardSampleForm()
         
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
@@ -18,31 +18,3 @@ final class JSONRendererTests: XCTestCase {
     }
 }
 
-extension JSONRendererTests {
-    func constructSampleForm() -> FormContainer {
-        let step1 = FormStepContainer(title: "Step 1") {
-            DescriptionFormItem(text: "This is a description")
-            
-            TextFormItem(title: "Enter your name", placeholder: "Name")
-            BooleanFormItem(placeholder: "Do you love me?")
-        }
-        
-        let step2 = FormStepContainer(title: "Step 1"){
-            DescriptionFormItem(text: "This is a description")
-            
-            BooleanFormItem(placeholder: "Do you love me?")
-            NumberFormItem(title: "Enter your age", placeholder: "Age", format: .integer)
-            
-            MultipleChoicesFormItem(title: "Pick one of tehse") {
-                FormChoiceItem(title: "Hussein")
-                FormChoiceItem(title: "Hussein 2")
-                FormChoiceItem(title: "Hussein 3")
-            }
-        }
-        
-        return FormContainer(id: "mock-form", title: "Mock Form") {
-            step1
-            step2
-        }
-    }
-}

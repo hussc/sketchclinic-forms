@@ -20,7 +20,7 @@ public struct FormItemsBuilder {
         var mutableItems: [FormItemProtocol] = []
         for (index, item) in items.enumerated() {
             var mutableItem = item
-            mutableItem.order = index + 1
+            mutableItem.order = index
             mutableItems.append(mutableItem)
         }
         
@@ -46,7 +46,7 @@ public struct FormItemsBuilder {
         var mutableItems: [FormItemProtocol] = []
         for (index, item) in components.enumerated() {
             var mutableItem = item
-            mutableItem.order = index + 1
+            mutableItem.order = index
             mutableItems.append(mutableItem)
         }
         
@@ -58,7 +58,7 @@ public struct FormItemsBuilder {
         var mutableItems: [FormItemProtocol] = []
         for (index, item) in component.enumerated() {
             var mutableItem = item
-            mutableItem.order = index + 1
+            mutableItem.order = index
             mutableItems.append(mutableItem)
         }
         
@@ -73,7 +73,7 @@ public struct FormItemsBuilder {
         var mutableItems: [FormItemProtocol] = []
         for (index, item) in component.enumerated() {
             var mutableItem = item
-            mutableItem.order = index + 1
+            mutableItem.order = index
             mutableItems.append(mutableItem)
         }
         
