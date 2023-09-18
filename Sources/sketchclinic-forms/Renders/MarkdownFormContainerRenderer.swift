@@ -16,12 +16,15 @@ public protocol MarkdownRenderableFormItemProtocol: FormItemProtocol {
  Note: Markdown text can't be read back once exported
  */
 public struct MarkdownFormContainerRenderer: FormContainerRenderer {
+    var includesFormTitle = false
+    var includesStepTitle = false
+    
     public init() { }
     
     public func render(form: FormContainer) throws -> String {
-        let title = "# \(form.title)"
+        let title = includesFormTitle ? "# \(form.title)" : ""
         let steps = form.steps.compactMap { step in
-            let stepTitle = "## \(step.title)\n"
+            let stepTitle = includesStepTitle ? "## \(step.title)\n" : "\n"
             let stepDescription = step.description.map { "> \($0)" }
             let fields: [String?] = step.fields.map { field in
                 if let markdownField = field.item as? MarkdownRenderableFormItemProtocol {
@@ -42,12 +45,12 @@ public struct MarkdownFormContainerRenderer: FormContainerRenderer {
 
 extension BooleanFormItem: MarkdownRenderableFormItemProtocol {
     public var markdownText: String? {
-        var markdown = title.isEmpty ? "" : "#### \(title)\n"
+        var markdown = ""
         
         if value {
-            markdown += "- [x] \(placeholder)"
+            markdown += "#### \(placeholder)\n> Yes"
         } else {
-            markdown += "- [ ] \(placeholder)"
+            markdown += "#### \(placeholder)\n> No"
         }
         
         return markdown
