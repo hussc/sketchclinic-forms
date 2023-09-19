@@ -48,9 +48,9 @@ extension BooleanFormItem: MarkdownRenderableFormItemProtocol {
         var markdown = ""
         
         if value {
-            markdown += "#### \(placeholder)\n> Yes"
+            markdown += "#### \(placeholder)\n> **Yes**"
         } else {
-            markdown += "#### \(placeholder)\n> No"
+            markdown += "#### \(placeholder)\n> **No**"
         }
         
         return markdown
@@ -65,7 +65,7 @@ extension DateFormItem: MarkdownRenderableFormItemProtocol {
 
 extension DescriptionFormItem: MarkdownRenderableFormItemProtocol {
     public var markdownText: String? {
-        return value
+        return nil
     }
 }
 
