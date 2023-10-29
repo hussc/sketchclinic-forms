@@ -10,7 +10,7 @@ import SwiftUI
 import MarkdownUI
 
 extension Theme {
-    static func visitNotesTheme(for color: Color) -> Theme {
+    public static func visitNotesTheme(for color: Color) -> Theme {
         return Theme()
             .text {
                 ForegroundColor(color)
