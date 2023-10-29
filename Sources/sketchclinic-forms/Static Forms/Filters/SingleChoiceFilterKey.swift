@@ -20,7 +20,7 @@ extension SingleChoiceFilterKey {
         DefaultFilterViewDescriptor(
             title: title,
             key: self,
-            viewForFilterType: BubbleSingleChoiceFilterItem.self
+            viewForFilterType: SingleChoiceFilterItemView.self
         )
     }
 }

@@ -25,11 +25,19 @@ struct TextInputFilterItem<Key: TextFilterKey>: FilterItemView {
     
     var body: some View {
         TextField(key.placeholder, text: filtersResult.binding(for: key, defaultValue: ""))
-            .frame(height: 53)
-            .font(styles.bodyFont)
-            .foregroundColor(styles.textColor)
-            .keyboardType(key.keyboardType ?? .default)
-            .multilineTextAlignment(key.textAlignment)
-            .lineLimit(1)
+            .font(.bodyFont)
+    }
+}
+
+#Preview {
+    struct MockFilterKey: TextFilterKey {
+        var placeholder: String { "Placeholder" }
+        var identifier: String { "text" }
+        var text: String { "Text" }
+        var title: String? { "Title" }
+    }
+
+    return InlineFiltersView {
+        MockFilterKey()
     }
 }

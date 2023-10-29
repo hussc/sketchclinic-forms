@@ -8,12 +8,15 @@
 import SwiftUI
 
 
-struct SingleChoiceFormItemView: View {
+struct SingleChoiceFormItemView: FormItemViewProtocol {
     @Environment(\.accent) var accent
     
     @Binding var item: SingleChoiceFormItem
     
-    
+    init(item: Binding<SingleChoiceFormItem>) {
+        self._item = item
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: Paddings.small) {
             ForEach(item.choices) { choice in

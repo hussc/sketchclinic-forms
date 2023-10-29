@@ -24,11 +24,7 @@ struct NumberInputFilterItem<Key: NumberFilterKey>: FilterItemView {
     
     var body: some View {
         TextField(key.placeholder, value: filtersResult.binding(for: key, defaultValue: 0), format: .number)
-            .frame(height: 53)
-            .font(styles.bodyFont)
-            .foregroundColor(styles.textColor)
             .keyboardType(.numberPad)
-            .multilineTextAlignment(.leading)
-            .lineLimit(1)
+            .font(.bodyFont)
     }
 }

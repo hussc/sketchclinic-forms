@@ -48,7 +48,7 @@ public struct DynamicChoicesSelectionView<Choice: ChoiceItem, Content: View>: Vi
             
             if choicesHolder.choices.count >= 10 {
                 FilterSearchBar(searchText: $searchText, placeholderText: title)
-                    .padding(.vertical, 16)
+                    .padding(16)
             }
             
             ScrollView {

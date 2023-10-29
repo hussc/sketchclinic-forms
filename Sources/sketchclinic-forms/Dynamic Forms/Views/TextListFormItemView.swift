@@ -8,7 +8,7 @@
 import SwiftUI
 
 
-struct TextListFormItemView: View {
+struct TextListFormItemView: FormItemViewProtocol {
     @Binding var item: TextListFormItem
     
     @FocusState private var focusItem: FocusItem?
@@ -17,6 +17,10 @@ struct TextListFormItemView: View {
     enum FocusItem: Hashable {
         case newItem
         case existing(String)
+    }
+
+    init(item: Binding<TextListFormItem>) {
+        self._item = item
     }
 
     var body: some View {

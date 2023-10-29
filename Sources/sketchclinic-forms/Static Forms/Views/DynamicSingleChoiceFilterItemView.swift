@@ -36,19 +36,16 @@ struct DynamicSingleChoiceFilterItemView<Key: DynamicSingleChoiceFilterKey>: Fil
     
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 6)
-                .stroke(styles.borders, lineWidth: 1)
-                .background(Color.white)
-                .frame(height: 53)
             HStack(spacing: 0) {
                 Text(filterResult.value(for: key)?.text ?? placeholder)
-                    .font(styles.bodyFont)
-                    .foregroundColor(selectedChoice == nil ? styles.placeholderColor : styles.textColor)
+                    .font(.bodyFont)
+                    .foregroundColor(selectedChoice == nil ? .textSecondary : styles.accentColor)
                 Spacer()
-                Image(systemName: "chevron.down")
-                    .font(.system(size: 12))
+                Image(systemName: "chevron.up.chevron.down")
+                    .font(.bodyFont)
                     .foregroundColor(styles.textColor)
-            }.padding(.horizontal, 12)
+            }
+            .padding(.vertical, 8)
         }.onTapGesture {
             if isEnabled {
                 isSelectionSheetPresented.toggle()
@@ -56,7 +53,7 @@ struct DynamicSingleChoiceFilterItemView<Key: DynamicSingleChoiceFilterKey>: Fil
         }.onAppear {
             selectedChoice = filterResult.value(for: key)
         }.sheet(isPresented: $isSelectionSheetPresented) {
-            DynamicChoicesSelectionView(title: placeholder, isMultiSelection: false, choicesHolder: key.choicesViewModel, showResultsTitle: .constant("apply".Localized())) { holder, choice in
+            DynamicChoicesSelectionView(title: placeholder, isMultiSelection: false, choicesHolder: key.choicesViewModel, showResultsTitle: .constant("Select")) { holder, choice in
                 view(for: choice)
             } onDismiss: { saveSelection in
                 if saveSelection {
@@ -100,3 +97,41 @@ struct DynamicSingleChoiceFilterItemView<Key: DynamicSingleChoiceFilterKey>: Fil
         }
     }
 }
+
+
+#Preview {
+    struct MockChoiceItem: ChoiceItem {
+        var text: String
+        var id: String { text }
+    }
+
+    struct MockDynamicSingleChoiceItem: DynamicSingleChoiceFilterKey {
+        typealias Choice = MockChoiceItem
+
+        var placeholder: String = "Pick a choice"
+        var title: String? = "Beeps"
+        var identifier: String = "filters"
+
+        func choices(for result: FilterResult) async throws -> [MockChoiceItem] {
+            [
+                MockChoiceItem(text: "Beep 1"),
+                MockChoiceItem(text: "Beep 2"),
+                MockChoiceItem(text: "Beep 3"),
+                MockChoiceItem(text: "Beep 4"),
+                MockChoiceItem(text: "Beep 5"),
+                MockChoiceItem(text: "Beep 6"),
+                MockChoiceItem(text: "Beep 7"),
+                MockChoiceItem(text: "Beep 8"),
+                MockChoiceItem(text: "Beep 9"),
+                MockChoiceItem(text: "Beep 10"),
+                MockChoiceItem(text: "Beep 11"),
+                MockChoiceItem(text: "Beep 12")
+            ]
+        }
+    }
+
+    return InlineFiltersView {
+        MockDynamicSingleChoiceItem()
+    }
+}
+

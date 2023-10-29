@@ -9,15 +9,15 @@ import SwiftUI
 
 
 struct FormBackgroundViewModifier: ViewModifier {
-    var title: String
+    var title: String? = nil
     var icon: String? = nil
     var description: String? = nil
     
     func body(content: Content) -> some View {
         HStack {
             VStack(alignment: .leading, spacing: Paddings.smallX) {
-                if !title.trimmed().isEmpty {
-                    Text(title)
+                if !(title?.trimmed().isEmpty ?? true) {
+                    Text(title ?? "")
                         .font(.headlineFont)
                         .foregroundColor(.textPrimary)
                 }
@@ -36,7 +36,7 @@ struct FormBackgroundViewModifier: ViewModifier {
 }
 
 extension View {
-    func formBackground(title: String, icon: String? = nil, description: String? = nil) -> some View {
+    func formBackground(title: String? = nil, icon: String? = nil, description: String? = nil) -> some View {
         modifier(FormBackgroundViewModifier(title: title, icon: icon, description: description))
     }
 }

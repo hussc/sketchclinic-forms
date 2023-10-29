@@ -24,6 +24,8 @@ let package = Package(
         .target(
             name: "SketchClinicForms", dependencies: [
                 .product(name: "MarkdownUI", package: "swift-markdown-ui")
+            ], resources: [
+                .process("Resources/Media.xcassets")
             ]),
         .testTarget(
             name: "SketchClinicFormsTests",

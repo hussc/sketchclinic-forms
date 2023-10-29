@@ -9,17 +9,17 @@ import Foundation
 import SwiftUI
 
 extension Color {
-    static var backgroundPrimary = Color("backgroundPrimary")
-    static var backgroundSecondary = Color("backgroundSecondary")
+    static var backgroundPrimary = Color("backgroundPrimary", bundle: .module)
+    static var backgroundSecondary = Color("backgroundSecondary", bundle: .module)
 
-    static var textPrimary = Color("textPrimary")
-    static var textSecondary = Color("textSecondary")
+    static var textPrimary = Color("textPrimary", bundle: .module)
+    static var textSecondary = Color("textSecondary", bundle: .module)
 
-    static var customBorder = Color("border")
+    static var customBorder = Color("border", bundle: .module)
 
-    static let messageSuccess = Color("messageSuccess")
-    static let messageFailure = Color("messageFailure")
-    static let messageNotice = Color("messageNotice")
+    static let messageSuccess = Color("messageSuccess", bundle: .module)
+    static let messageFailure = Color("messageFailure", bundle: .module)
+    static let messageNotice = Color("messageNotice", bundle: .module)
 }
 
 enum IBMPlexFontName: String {

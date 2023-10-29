@@ -35,23 +35,19 @@ struct DynamicMultipleChoiceFilterItemView<Key: DynamicChoicesFilterKey>: Filter
     
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 6)
-                .stroke(styles.borders, lineWidth: 1)
-                .background(Color.white)
-                .frame(height: 45)
             HStack(spacing: 0) {
                 Text(placeholderText)
                     .font(styles.bodyFont)
-                    .foregroundColor(selectedChoices.isEmpty ? styles.placeholderColor : styles.textColor)
+                    .foregroundColor(selectedChoices.isEmpty ? .textSecondary : styles.accentColor)
                 Spacer()
-                Image(systemName: "chevron.down")
-                    .font(.system(size: 12))
-                    .foregroundColor(styles.textColor)
-            }.padding(.horizontal, 12)
+                Image(systemName: "chevron.up.chevron.down")
+                    .font(.bodyFont)
+                    .foregroundColor(.textPrimary)
+            }.padding(.vertical, 8)
         }.onTapGesture {
             isSelectionSheetPresented = true
         }.onChange(of: selectedChoices, perform: { newValue in
-            self.showResultsTitle = "apply_selected_count".Localized().replacingOccurrences(of: "%s", with: "\(selectedChoices.count)")
+            self.showResultsTitle = "Select (\(newValue.count))"
         }).onAppear {
             self.selectedChoices = filterResult.value(for: key) ?? []
         }.sheet(isPresented: $isSelectionSheetPresented) {
@@ -93,36 +89,44 @@ struct DynamicMultipleChoiceFilterItemView<Key: DynamicChoicesFilterKey>: Filter
     }
 }
 
-extension Array where Element: Equatable {
+fileprivate extension Array where Element: Equatable {
     func isLastElement(_ element: Element) -> Bool {
         (firstIndex(of: element) == count - 1)
     }
 }
 
-extension View {
-    
-    /// Hide or show the view based on a boolean value.
-    ///
-    /// Example for visibility:
-    ///
-    ///     Text("Label")
-    ///         .isHidden(true)
-    ///
-    /// Example for complete removal:
-    ///
-    ///     Text("Label")
-    ///         .isHidden(true, remove: true)
-    ///
-    /// - Parameters:
-    ///   - hidden: Set to `false` to show the view. Set to `true` to hide the view.
-    ///   - remove: Boolean value indicating whether or not to remove the view.
-    @ViewBuilder func isHidden(_ hidden: Bool, remove: Bool = false) -> some View {
-        if hidden {
-            if !remove {
-                self.hidden()
-            }
-        } else {
-            self
+#Preview {
+    struct MockChoiceItem: ChoiceItem {
+        var text: String
+        var id: String { text }
+    }
+
+    struct MockDynamicChoicesItem: DynamicChoicesFilterKey {
+        typealias Choice = MockChoiceItem
+
+        var placeholder: String = "Pick a choice"
+        var title: String? = "Beeps"
+        var identifier: String = "filters"
+
+        func choices(for result: FilterResult) async throws -> [MockChoiceItem] {
+            [
+                MockChoiceItem(text: "Beep 1"),
+                MockChoiceItem(text: "Beep 2"),
+                MockChoiceItem(text: "Beep 3"),
+                MockChoiceItem(text: "Beep 4"),
+                MockChoiceItem(text: "Beep 5"),
+                MockChoiceItem(text: "Beep 6"),
+                MockChoiceItem(text: "Beep 7"),
+                MockChoiceItem(text: "Beep 8"),
+                MockChoiceItem(text: "Beep 9"),
+                MockChoiceItem(text: "Beep 10"),
+                MockChoiceItem(text: "Beep 11"),
+                MockChoiceItem(text: "Beep 12")
+            ]
         }
+    }
+
+    return InlineFiltersView {
+        MockDynamicChoicesItem()
     }
 }

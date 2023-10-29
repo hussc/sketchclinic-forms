@@ -31,3 +31,39 @@ extension String {
         self
     }
 }
+
+#Preview {
+    struct MockNumberField: NumberFilterKey {
+        var identifier: String { "number" }
+        var title: String { "Number" }
+        var placeholder: String { "Enter a number" }
+    }
+
+    struct MockTextField: TextFilterKey {
+        var identifier: String { "text" }
+        var title: String { "Text" }
+        var placeholder: String { "Enter a text" }
+    }
+
+    struct MockToggleField: ToggleFilterKey {
+        var identifier: String { "toggle" }
+        var title: String? { "Toggle" }
+        var text: String { "Toggle here if you agree" }
+    }
+
+    struct MockDateField: DateFilterKey {
+        var identifier: String { "date" }
+        var title: String { "Date" }
+        var placeholder: String { "Enter a date" }
+    }
+
+    return FiltersView(filterResult: .init(), title: "Filters", completion: { result in
+
+    }) {
+        MockNumberField()
+        MockTextField()
+        MockToggleField()
+        MockDateField()
+        Spacer()
+    }
+}

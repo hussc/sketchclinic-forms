@@ -22,19 +22,11 @@ public struct FilterItemContainerView<FilterItem: View>: View {
     }
     
     public var body: some View {
-        VStack(spacing: 0) {
-            if let title {
-                headerView(for: title)
-                Spacer().frame(height: 8)
+        contentView()
+            .formBackground(title: title)
+            .onPreferenceChange(ElementTitlePreferenceKey.self) {
+                self.title = $0
             }
-            
-            contentView()
-        }
-        .padding(.horizontal, 16)
-        .background(Color.white)
-        .onPreferenceChange(ElementTitlePreferenceKey.self) {
-            self.title = $0
-        }
     }
     
     @ViewBuilder func headerView(for title: String) -> some View {

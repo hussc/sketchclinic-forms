@@ -23,33 +23,31 @@ public struct FilterSearchBar: View {
     
     public var body: some View {
         ZStack {
-            RoundedCorner(radius: 4, corners: .allCorners)
-                .stroke(styles.placeholderColor, lineWidth: 1.5)
+            RoundedRectangle(cornerRadius: 6)
+                .stroke(Color.customBorder, lineWidth: 1)
                 .background(Color.white)
-                .frame(height: 48)
+                .frame(height: 50)
             HStack {
                 TextField(placeholderText, text: $searchText, onCommit: {
                     onCommit?()
                 })
                 .focused($isTextFieldFocused)
-                .font(styles.bodyFont)
+                .font(.bodyFont)
                 .padding(.horizontal, 14)
                 
                 Spacer()
                 ZStack {
-                    RoundedCorner(radius: 4, corners: .allCorners)
-                        .stroke(styles.borders, lineWidth: 1.5)
+                    RoundedRectangle(cornerRadius: 6)
                         .background(styles.accentColor)
-                        .frame(width: 48, height: 48)
+                        .frame(width: 50, height: 50)
                     Image(systemName: "magnifyingglass")
                         .foregroundColor(.white)
-                        .font(.system(size: 18))
+                        .font(.bodyFont)
                 }.highPriorityGesture(TapGesture().onEnded({
                     onCommit?()
                 }))
             }
         }
-        .padding(.horizontal, 16)
         .onTapGesture {
             isTextFieldFocused = false
         }

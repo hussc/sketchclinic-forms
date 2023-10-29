@@ -20,7 +20,7 @@ extension ChoicesFilterKey {
         DefaultFilterViewDescriptor(
             title: title,
             key: self,
-            viewForFilterType: BubbleChoicesFilterItem.self
+            viewForFilterType: MultipleChoiceFilterItemView.self
         )
     }
 }

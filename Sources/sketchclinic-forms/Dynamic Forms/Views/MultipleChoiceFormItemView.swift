@@ -8,10 +8,14 @@
 import SwiftUI
 
 
-struct MultipleChoiceFormItemView: View {
+struct MultipleChoiceFormItemView: FormItemViewProtocol {
     @Environment(\.accent) var accent
     @Binding var item: MultipleChoicesFormItem
-    
+
+    init(item: Binding<MultipleChoicesFormItem>) {
+        self._item = item
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: Paddings.small) {
             ForEach(item.choices) { choice in

@@ -9,9 +9,13 @@ import SwiftUI
 import MarkdownUI
 
 
-struct DescriptionFormItemView: View {
+struct DescriptionFormItemView: FormItemViewProtocol {
     @Binding var item: DescriptionFormItem
-    
+
+    init(item: Binding<DescriptionFormItem>) {
+        self._item = item
+    }
+
     var body: some View {
         Markdown(item.value)
             .markdownTheme(.defaultTheme)
