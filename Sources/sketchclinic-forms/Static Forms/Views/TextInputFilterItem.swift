@@ -26,6 +26,7 @@ struct TextInputFilterItem<Key: TextFilterKey>: FilterItemView {
     var body: some View {
         TextField(key.placeholder, text: filtersResult.binding(for: key, defaultValue: ""))
             .font(.bodyFont)
+            .registeringFilter(key)
     }
 }
 

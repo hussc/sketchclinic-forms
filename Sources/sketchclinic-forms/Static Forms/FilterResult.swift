@@ -10,13 +10,13 @@ import Foundation
 import SwiftUI
 import Combine
 
-public class FilterResult: FilterResultProtocol, ObservableObject {
+open class FilterResult: FilterResultProtocol, ObservableObject {
     public private(set) var previousStorage: [AnyFilterKey: FilterValueEncodable]?
     
-    @Published public private(set) var storage: [AnyFilterKey: FilterValueEncodable] = [:]
-    @Published public private(set) var defaultStorage: [AnyFilterKey: FilterValueEncodable] = [:]
-    @Published public private(set) var isContentFiltered: Bool = false
-    
+    @Published public internal(set) var storage: [AnyFilterKey: FilterValueEncodable] = [:]
+    @Published public internal(set) var defaultStorage: [AnyFilterKey: FilterValueEncodable] = [:]
+    @Published public internal(set) var isContentFiltered: Bool = false
+
     public var isEmpty: Bool {
         if storage.isEmpty { return true }
         if !storage.isEmpty && defaultStorage.isEmpty { return false }
