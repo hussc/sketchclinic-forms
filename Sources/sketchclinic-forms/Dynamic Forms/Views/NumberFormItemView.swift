@@ -7,15 +7,14 @@
 
 import SwiftUI
 
-
-struct NumberFormItemView: FormItemViewProtocol {
+public struct NumberFormItemView: FormItemViewProtocol {
     @Binding var item: NumberFormItem
 
-    init(item: Binding<NumberFormItem>) {
+    public init(item: Binding<NumberFormItem>) {
         self._item = item
     }
 
-    var body: some View {
+    public var body: some View {
         TextField(item.placeholder, value: $item.value, format: .number)
             .keyboardType(.numberPad)
             .font(.bodyFont)

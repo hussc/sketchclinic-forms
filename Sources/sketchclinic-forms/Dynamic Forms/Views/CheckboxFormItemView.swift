@@ -7,22 +7,22 @@
 
 import SwiftUI
 
-struct CheckboxFormItemView: FormItemViewProtocol {
-    enum CheckboxStyle {
+public struct CheckboxFormItemView: FormItemViewProtocol {
+    public enum CheckboxStyle {
         case square
         case circle
     }
     
     let style: CheckboxStyle = .square
-    
+
     @Environment(\.accent) var accent
     @Binding var item: BooleanFormItem
     
-    init(item: Binding<BooleanFormItem>) {
+    public init(item: Binding<BooleanFormItem>) {
         self._item = item
     }
     
-    var body: some View {
+    public var body: some View {
         HStack(spacing: Paddings.small) {
             Image(systemName: item.value ? style.selectedImageName : style.unselectedImageName)
                 .symbolRenderingMode(.hierarchical)

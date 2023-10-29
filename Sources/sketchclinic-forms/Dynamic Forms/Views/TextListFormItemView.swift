@@ -7,8 +7,7 @@
 
 import SwiftUI
 
-
-struct TextListFormItemView: FormItemViewProtocol {
+public struct TextListFormItemView: FormItemViewProtocol {
     @Binding var item: TextListFormItem
     
     @FocusState private var focusItem: FocusItem?
@@ -19,11 +18,11 @@ struct TextListFormItemView: FormItemViewProtocol {
         case existing(String)
     }
 
-    init(item: Binding<TextListFormItem>) {
+    public init(item: Binding<TextListFormItem>) {
         self._item = item
     }
 
-    var body: some View {
+    public var body: some View {
         VStack(alignment: .leading, spacing: Paddings.small) {
             ForEach(Array(item.value.enumerated()), id: \.offset) { index, item in
                 TextField(self.item.placeholder, text: Binding(

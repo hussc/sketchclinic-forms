@@ -9,7 +9,7 @@ import SwiftUI
 import MarkdownUI
 
 extension FontProperties.Family {
-    static var ibmPlex: FontProperties.Family {
+    public static var ibmPlex: FontProperties.Family {
         .custom("IBMPlexSansArabic-Regular")
     }
 }

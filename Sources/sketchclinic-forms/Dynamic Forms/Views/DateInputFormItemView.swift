@@ -7,16 +7,15 @@
 
 import SwiftUI
 
-
-struct DateInputFormItemView: FormItemViewProtocol {
+public struct DateInputFormItemView: FormItemViewProtocol {
     @Environment(\.accent) var accent
     @Binding var item: DateFormItem
 
-    init(item: Binding<DateFormItem>) {
+    public init(item: Binding<DateFormItem>) {
         self._item = item
     }
 
-    var body: some View {
+    public var body: some View {
         DatePicker(selection: _item.value, displayedComponents: .date) {
             EmptyView()
         }

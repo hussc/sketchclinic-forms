@@ -150,6 +150,11 @@ public class FilterResult: FilterResultProtocol, ObservableObject {
         isContentFiltered = !isEmpty
         return self
     }
+
+    public func output<T: Decodable>(for type: T.Type = T.self) throws -> T {
+        let decoder = JSONDecoder()
+        return try decoder.decode(type, from: JSONSerialization.data(withJSONObject: self.dictionaryRepresentation(), options: []))
+    }
 }
 
 extension Equatable {

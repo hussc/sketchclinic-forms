@@ -7,15 +7,14 @@
 
 import SwiftUI
 
-
-struct TextInputFormItemView: FormItemViewProtocol {
+public struct TextInputFormItemView: FormItemViewProtocol {
     @Binding var item: TextFormItem
 
-    init(item: Binding<TextFormItem>) {
+    public init(item: Binding<TextFormItem>) {
         self._item = item
     }
 
-    var body: some View {
+    public var body: some View {
         TextField(item.placeholder, text: _item.value)
             .font(.bodyFont)
             .formBackground(title: item.title)

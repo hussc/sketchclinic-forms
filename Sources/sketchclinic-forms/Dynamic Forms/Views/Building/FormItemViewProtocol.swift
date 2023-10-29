@@ -8,7 +8,7 @@
 import SwiftUI
 
 
-protocol FormItemViewProtocol: View {
+public protocol FormItemViewProtocol: View {
     associatedtype Item: FormItemProtocol
     
     init(item: Binding<Item>)

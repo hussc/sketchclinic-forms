@@ -8,10 +8,14 @@
 import SwiftUI
 
 
-struct AnyFormItemView: View {
-    @Binding var item: FormItemProtocol
-    
-    var body: some View {
+public struct AnyFormItemView: View {
+    @Binding public var item: FormItemProtocol
+
+    public init(item: Binding<FormItemProtocol>) {
+        self._item = item
+    }
+
+    public var body: some View {
         switch item {
         case is BooleanFormItem:
             CheckboxFormItemView(item: _item.transformed())

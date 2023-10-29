@@ -11,11 +11,11 @@ import SwiftUI
 struct LongTextFormItemView: FormItemViewProtocol {
     @Binding var item: LongTextFormItem
 
-    init(item: Binding<LongTextFormItem>) {
+    public init(item: Binding<LongTextFormItem>) {
         self._item = item
     }
 
-    var body: some View {
+    public var body: some View {
         FieldItemView(field: .init(identifier: item.id, name: item.title, icon: nil), text: _item.value)
     }
 }

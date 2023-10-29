@@ -7,17 +7,16 @@
 
 import SwiftUI
 
-
-struct SingleChoiceFormItemView: FormItemViewProtocol {
+public struct SingleChoiceFormItemView: FormItemViewProtocol {
     @Environment(\.accent) var accent
     
     @Binding var item: SingleChoiceFormItem
     
-    init(item: Binding<SingleChoiceFormItem>) {
+    public init(item: Binding<SingleChoiceFormItem>) {
         self._item = item
     }
 
-    var body: some View {
+    public var body: some View {
         VStack(alignment: .leading, spacing: Paddings.small) {
             ForEach(item.choices) { choice in
                 let isChecked = item.value == choice

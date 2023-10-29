@@ -12,11 +12,11 @@ struct MultipleChoiceFormItemView: FormItemViewProtocol {
     @Environment(\.accent) var accent
     @Binding var item: MultipleChoicesFormItem
 
-    init(item: Binding<MultipleChoicesFormItem>) {
+    public init(item: Binding<MultipleChoicesFormItem>) {
         self._item = item
     }
 
-    var body: some View {
+    public var body: some View {
         VStack(alignment: .leading, spacing: Paddings.small) {
             ForEach(item.choices) { choice in
                 let isChecked = item.value.contains(choice)
