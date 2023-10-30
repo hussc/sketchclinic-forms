@@ -67,25 +67,30 @@ struct DynamicMultipleChoiceFilterItemView<Key: DynamicChoicesFilterKey>: Filter
 
     @ViewBuilder func view(for choice: Choice, holder: DynamicChoicesHolder<Choice>) -> some View {
         VStack(alignment: .leading, spacing: 0) {
-            HStack {
+            HStack(spacing: Paddings.smallX) {
                 Image(systemName: selectedChoices.contains(choice) ?  "checkmark.square.fill" : "square")
-                    .font(.system(size: 16, weight: .regular))
-                    .foregroundColor(selectedChoices.contains(choice) ? styles.accentColor : styles.textColor)
-                Spacer().frame(width: 8)
+                    .font(.bodyFont)
+                    .foregroundColor(styles.accentColor)
                 Text(choice.title)
-                    .font(styles.bodyFont)
-                    .foregroundColor(styles.textColor)
-            }.padding(.vertical, 16)
-            
-            Divider().isHidden(holder.choices.isLastElement(choice))
-        }.padding(.horizontal, 16)
-            .onTapGesture {
-                if let index = selectedChoices.firstIndex(of: choice) {
-                    selectedChoices.remove(at: index)
-                } else {
-                    selectedChoices.append(choice)
-                }
+                    .font(selectedChoices.contains(choice) ? .headlineFont : .bodyFont)
+                    .foregroundColor(selectedChoices.contains(choice) ? styles.accentColor : .textPrimary)
+                Spacer()
             }
+            .padding(.vertical, 16)
+            .padding(.horizontal, Paddings.medium)
+            .background {
+                RoundedRectangle(cornerRadius: 6)
+                    .fill(Color.backgroundSecondary)
+            }
+        }
+        .padding(.horizontal, 16)
+        .onTapGesture {
+            if let index = selectedChoices.firstIndex(of: choice) {
+                selectedChoices.remove(at: index)
+            } else {
+                selectedChoices.append(choice)
+            }
+        }
     }
 }
 

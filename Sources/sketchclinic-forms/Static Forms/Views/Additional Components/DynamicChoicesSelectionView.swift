@@ -44,7 +44,8 @@ public struct DynamicChoicesSelectionView<Choice: ChoiceItem, Content: View>: Vi
             TitleView(title: title) {
                 onDismiss(false)
                 presentationMode.wrappedValue.dismiss()
-            }.padding(.horizontal, Paddings.medium)
+            }
+            .padding(Paddings.medium)
 
             if choicesHolder.choices.count >= 10 {
                 FilterSearchBar(searchText: $searchText, placeholderText: title)
@@ -144,7 +145,8 @@ extension DynamicChoicesSelectionView {
                     Text(title)
                         .font(.headlineFont)
                         .foregroundColor(.textPrimary)
-                }.padding(.horizontal, 16)
+                    Spacer()
+                }
             }
         }
     }
