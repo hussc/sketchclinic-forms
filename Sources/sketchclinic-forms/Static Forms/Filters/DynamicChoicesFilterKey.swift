@@ -12,18 +12,17 @@ import SwiftUI
 public protocol DynamicChoicesFilterKey<Choice>: PresentableFilterKey where Value == [Choice] {
     associatedtype Choice: ChoiceItem
     
-    var placeholder: String { get }
+    var placeholder: String? { get }
     
     /**
      Provides a way to load the choices, the dynamic holder acts as a view model which will be captured by the filter view for one time to load the choices and subscribe to any change.
      */
-    var choicesViewModel: DynamicChoicesHolder<Choice> { get }
-
-    
     func choices(for result: FilterResult) async throws -> [Choice]
 }
 
 extension DynamicChoicesFilterKey {
+    var placeholder: String? { nil }
+
     var choicesViewModel: DynamicChoicesHolder<Choice> {
         .init { filters in
             try await self.choices(for: filters)

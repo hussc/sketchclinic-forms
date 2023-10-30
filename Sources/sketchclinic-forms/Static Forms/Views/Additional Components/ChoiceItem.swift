@@ -9,9 +9,9 @@
 import Foundation
 
 public protocol ChoiceItem: FilterValueEncodable, Identifiable, Equatable, Hashable {
-    var text: String { get }
+    var title: String { get }
 }
 
 extension ChoiceItem {
-    public var stringRepresentation: String { text }
+    public var stringRepresentation: String { title }
 }

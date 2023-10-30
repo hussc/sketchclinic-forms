@@ -24,42 +24,19 @@ public struct FilterSearchBar: View {
     public var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 6)
-                .stroke(Color.customBorder, lineWidth: 1)
-                .background(Color.white)
-                .frame(height: 50)
+                .background(Color.backgroundSecondary)
+                .frame(height: 60)
             HStack {
                 TextField(placeholderText, text: $searchText, onCommit: {
                     onCommit?()
                 })
                 .focused($isTextFieldFocused)
                 .font(.bodyFont)
-                .padding(.horizontal, 14)
-                
-                Spacer()
-                ZStack {
-                    RoundedRectangle(cornerRadius: 6)
-                        .background(styles.accentColor)
-                        .frame(width: 50, height: 50)
-                    Image(systemName: "magnifyingglass")
-                        .foregroundColor(.white)
-                        .font(.bodyFont)
-                }.highPriorityGesture(TapGesture().onEnded({
-                    onCommit?()
-                }))
+                .padding(.horizontal, Paddings.smallX)
             }
         }
         .onTapGesture {
             isTextFieldFocused = false
-        }
-    }
-    
-    struct RoundedCorner: Shape {
-        var radius: CGFloat = .infinity
-        var corners: UIRectCorner = .allCorners
-        
-        func path(in rect: CGRect) -> Path {
-            let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-            return Path(path.cgPath)
         }
     }
 }

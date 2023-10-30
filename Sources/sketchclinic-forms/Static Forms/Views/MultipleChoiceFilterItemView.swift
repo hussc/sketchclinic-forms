@@ -32,7 +32,7 @@ struct MultipleChoiceFilterItemView<Key: ChoicesFilterKey>: FilterItemView {
                         .symbolRenderingMode(.hierarchical)
                         .font(.title2.weight(.medium))
                         .foregroundColor(styles.accentColor)
-                    Text(choice.text)
+                    Text(choice.title)
                         .foregroundColor(.textPrimary)
                         .font(.bodyFont)
                 }
@@ -60,8 +60,8 @@ struct MultipleChoiceFilterItemView<Key: ChoicesFilterKey>: FilterItemView {
 
 #Preview {
     struct MockChoiceItem: ChoiceItem {
-        var text: String { "Choice" }
-        var id: String { text }
+        var title: String { "Choice" }
+        var id: String { title }
     }
 
     struct ChoicesMockFilterItem: ChoicesFilterKey {

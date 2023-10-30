@@ -32,7 +32,7 @@ struct TabsFilterItemView<Key: SingleChoiceFilterKey>: FilterItemView {
                     ForEach(choices.indices, id: \.self) { index in
                         Button(action: { self.selectedIndex = index }) {
                             Spacer()
-                            Text(self.choices[index].text)
+                            Text(self.choices[index].title)
                                 .foregroundColor(selectedIndex == index ? styles.accentColor : styles.placeholderColor)
                                 .font(selectedIndex == index ? styles.headlineFont : styles.bodyFont)
                             Spacer()

@@ -52,7 +52,7 @@ extension BubbleChoicesFilterItem {
         let isSelected: Bool
         
         var body: some View {
-            Text(choice.text)
+            Text(choice.title)
                 .font(styles.bodyFont)
                 .foregroundColor(isSelected ? styles.accentColor : styles.secondaryTextColor)
                 .padding()

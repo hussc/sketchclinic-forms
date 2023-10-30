@@ -33,7 +33,7 @@ struct SingleChoiceFilterItemView<Key: SingleChoiceFilterKey>: FilterItemView {
                         .symbolRenderingMode(.hierarchical)
                         .font(.title2.weight(.medium))
                         .foregroundColor(styles.accentColor)
-                    Text(choice.text)
+                    Text(choice.title)
                         .font(.bodyFont)
                         .foregroundColor(.textPrimary)
                 }
@@ -45,8 +45,8 @@ struct SingleChoiceFilterItemView<Key: SingleChoiceFilterKey>: FilterItemView {
 
 #Preview {
     struct MockChoiceItem: ChoiceItem {
-        var text: String { "Choice " }
-        var id: String { text }
+        var title: String { "Choice " }
+        var id: String { title }
     }
 
     struct SingleChoiceMockFilterItem: SingleChoiceFilterKey {

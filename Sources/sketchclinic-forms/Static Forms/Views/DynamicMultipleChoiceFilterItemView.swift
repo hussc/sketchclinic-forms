@@ -21,16 +21,16 @@ struct DynamicMultipleChoiceFilterItemView<Key: DynamicChoicesFilterKey>: Filter
     @Environment(\.styles) var styles
 
     let key: Key
-    let placeholder: String
-    
+    let placeholder: String?
+
     init(key: Key) {
         self.key = key
         self.placeholder = key.placeholder
     }
     
     private var placeholderText: String {
-        guard let value = filterResult.value(for: key) else { return placeholder }
-        return value.isEmpty ? placeholder : value.map { $0.text }.joined(separator: ", ")
+        guard let value = filterResult.value(for: key) else { return placeholder ?? "" }
+        return value.isEmpty ? placeholder ?? "" : value.map { $0.title }.joined(separator: ", ")
     }
     
     var body: some View {
@@ -51,7 +51,7 @@ struct DynamicMultipleChoiceFilterItemView<Key: DynamicChoicesFilterKey>: Filter
         }).onAppear {
             self.selectedChoices = filterResult.value(for: key) ?? []
         }.sheet(isPresented: $isSelectionSheetPresented) {
-            DynamicChoicesSelectionView(title: placeholder, isMultiSelection: true, choicesHolder: key.choicesViewModel, showResultsTitle: $showResultsTitle) { holder, choice in
+            DynamicChoicesSelectionView(title: placeholder ?? "", isMultiSelection: true, choicesHolder: key.choicesViewModel, showResultsTitle: $showResultsTitle) { holder, choice in
                 view(for: choice, holder: holder)
             } onDismiss: { saveSelection in
                 if saveSelection {
@@ -72,7 +72,7 @@ struct DynamicMultipleChoiceFilterItemView<Key: DynamicChoicesFilterKey>: Filter
                     .font(.system(size: 16, weight: .regular))
                     .foregroundColor(selectedChoices.contains(choice) ? styles.accentColor : styles.textColor)
                 Spacer().frame(width: 8)
-                Text(choice.text)
+                Text(choice.title)
                     .font(styles.bodyFont)
                     .foregroundColor(styles.textColor)
             }.padding(.vertical, 16)
@@ -97,31 +97,31 @@ fileprivate extension Array where Element: Equatable {
 
 #Preview {
     struct MockChoiceItem: ChoiceItem {
-        var text: String
-        var id: String { text }
+        var title: String
+        var id: String { title }
     }
 
     struct MockDynamicChoicesItem: DynamicChoicesFilterKey {
         typealias Choice = MockChoiceItem
 
-        var placeholder: String = "Pick a choice"
+        var placeholder: String? = "Pick a choice"
         var title: String? = "Beeps"
         var identifier: String = "filters"
 
         func choices(for result: FilterResult) async throws -> [MockChoiceItem] {
             [
-                MockChoiceItem(text: "Beep 1"),
-                MockChoiceItem(text: "Beep 2"),
-                MockChoiceItem(text: "Beep 3"),
-                MockChoiceItem(text: "Beep 4"),
-                MockChoiceItem(text: "Beep 5"),
-                MockChoiceItem(text: "Beep 6"),
-                MockChoiceItem(text: "Beep 7"),
-                MockChoiceItem(text: "Beep 8"),
-                MockChoiceItem(text: "Beep 9"),
-                MockChoiceItem(text: "Beep 10"),
-                MockChoiceItem(text: "Beep 11"),
-                MockChoiceItem(text: "Beep 12")
+                MockChoiceItem(title: "Beep 1"),
+                MockChoiceItem(title: "Beep 2"),
+                MockChoiceItem(title: "Beep 3"),
+                MockChoiceItem(title: "Beep 4"),
+                MockChoiceItem(title: "Beep 5"),
+                MockChoiceItem(title: "Beep 6"),
+                MockChoiceItem(title: "Beep 7"),
+                MockChoiceItem(title: "Beep 8"),
+                MockChoiceItem(title: "Beep 9"),
+                MockChoiceItem(title: "Beep 10"),
+                MockChoiceItem(title: "Beep 11"),
+                MockChoiceItem(title: "Beep 12")
             ]
         }
     }

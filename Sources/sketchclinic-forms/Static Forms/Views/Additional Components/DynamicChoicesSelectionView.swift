@@ -40,15 +40,15 @@ public struct DynamicChoicesSelectionView<Choice: ChoiceItem, Content: View>: Vi
     }
     
     public var body: some View {
-        VStack {
+        VStack(spacing: Paddings.medium) {
             TitleView(title: title) {
                 onDismiss(false)
                 presentationMode.wrappedValue.dismiss()
-            }
-            
+            }.padding(.horizontal, Paddings.medium)
+
             if choicesHolder.choices.count >= 10 {
                 FilterSearchBar(searchText: $searchText, placeholderText: title)
-                    .padding(16)
+                    .padding(.horizontal, Paddings.medium)
             }
             
             ScrollView {
@@ -72,7 +72,7 @@ public struct DynamicChoicesSelectionView<Choice: ChoiceItem, Content: View>: Vi
             if newValue.isEmpty {
                 self.choices = originalChoices ?? []
             } else {
-                self.choices = originalChoices?.filter { $0.text.lowercased().contains(newValue.lowercased()) } 
+                self.choices = originalChoices?.filter { $0.title.lowercased().contains(newValue.lowercased()) } 
                 ?? []
             }
         }
@@ -90,10 +90,10 @@ extension DynamicChoicesSelectionView {
         let onDismiss: ((Bool) -> Void)
                 
         var body: some View {
-            if isMultiSelection {
-                VStack {
-                    Divider()
-                    HStack(spacing: 20) {
+            VStack(spacing: 0) {
+                HStack(spacing: Paddings.smallX) {
+
+                    if isMultiSelection {
                         Button {
                             onDismiss(false)
                             presentationMode.wrappedValue.dismiss()
@@ -108,23 +108,26 @@ extension DynamicChoicesSelectionView {
                             onDismiss(true)
                             presentationMode.wrappedValue.dismiss()
                         }
-                        .buttonStyle(FilterSubmitButtonStyle(color: styles.textColor))
-                        .frame(height: 45)
+                        .buttonStyle(FilterSubmitButtonStyle(color: styles.accentColor))
+                        .frame(height: 50)
                         .frame(maxWidth: .infinity)
+                    } else {
+                        Button("Apply") {
+                            onDismiss(true)
+                            presentationMode.wrappedValue.dismiss()
+                        }
+                        .buttonStyle(FilterSubmitButtonStyle(color: styles.textColor))
+                        .frame(height: 50)
                     }
-                    .padding()
+
                 }
-            } else {
-                VStack {
-                    Divider()
-                    Button("Apply") {
-                        onDismiss(true)
-                        presentationMode.wrappedValue.dismiss()
-                    }
-                    .buttonStyle(FilterSubmitButtonStyle(color: styles.textColor))
-                    .frame(height: 45)
-                    .padding()
-                }
+                .padding(.horizontal, Paddings.medium)
+                .padding(.vertical, Paddings.medium)
+            }
+            .background {
+                RoundedRectangle(cornerRadius: 6)
+                    .fill(Color.backgroundSecondary)
+                    .ignoresSafeArea(.all, edges: .bottom)
             }
         }
     }
@@ -139,18 +142,10 @@ extension DynamicChoicesSelectionView {
             VStack(alignment: .leading) {
                 HStack {
                     Text(title)
-                        .font(styles.headlineFont)
-                        .foregroundColor(styles.textColor)
-
-                    Spacer()
-                    Button(action: {
-                        closeCallback?()
-                    }, label: {
-                        Image(systemName: "xmark")
-                            .foregroundColor(.black)
-                    })
-                }.padding(16)
-            }.padding(.top, 20)
+                        .font(.headlineFont)
+                        .foregroundColor(.textPrimary)
+                }.padding(.horizontal, 16)
+            }
         }
     }
 }

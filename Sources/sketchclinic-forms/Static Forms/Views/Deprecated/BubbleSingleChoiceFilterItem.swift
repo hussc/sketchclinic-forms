@@ -51,7 +51,7 @@ extension BubbleSingleChoiceFilterItem {
         @Environment(\.styles) var styles
 
         var body: some View {
-            Text(choice.text)
+            Text(choice.title)
                 .font(styles.bodyFont)
                 .foregroundColor(isSelected ? styles.accentColor : styles.secondaryTextColor)
                 .padding()
