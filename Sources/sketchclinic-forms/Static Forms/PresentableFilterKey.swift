@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import SketchClinicFoundation
 
 /**
  Any Filter can be presentable as a view when it provides "How" it should be displayed, this protocol requires one property that specifies how the filter should be rendered.

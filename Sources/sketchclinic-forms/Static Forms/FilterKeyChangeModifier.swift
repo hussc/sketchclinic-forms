@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import SketchClinicFoundation
 
 struct FilterKeyChangeModifier<Key: FilterKey>: ViewModifier {
     @EnvironmentObject var filterResult: FilterResult

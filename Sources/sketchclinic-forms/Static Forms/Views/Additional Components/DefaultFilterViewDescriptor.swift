@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SketchClinicFoundation
 
 public struct DefaultFilterViewDescriptor<Key: FilterKey, FilterView: FilterItemView<Key>>: FilterViewDesciptor {
     

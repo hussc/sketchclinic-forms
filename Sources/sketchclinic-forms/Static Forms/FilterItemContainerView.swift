@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SketchClinicFoundation
 
 public struct FilterItemContainerView<FilterItem: View>: View {
     @State private var title: String?

@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SketchClinicFoundation
 
 struct BubbleSingleChoiceFilterItem<Key: SingleChoiceFilterKey>: FilterItemView {
     typealias Choice = Key.Choice

@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import SketchClinicFoundation
 
 public protocol ToggleFilterKey: FilterKey<Bool>, PresentableFilterKey {
     

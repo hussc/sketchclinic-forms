@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SketchClinicFoundation
 
 public struct TextInputFormItemView: FormItemViewProtocol {
     @Binding var item: TextFormItem

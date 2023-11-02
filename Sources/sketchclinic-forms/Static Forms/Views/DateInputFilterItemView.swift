@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SketchClinicFoundation
 
 struct DateInputFilterItemView<Key: DateFilterKey>: FilterItemView {
     @EnvironmentObject private var filterResult: FilterResult

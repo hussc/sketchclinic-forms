@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SketchClinicFoundation
 
 
 struct LongTextFormItemView: FormItemViewProtocol {

@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SketchClinicFoundation
 
 public struct FilterSearchBar: View {
     @Binding var searchText: String

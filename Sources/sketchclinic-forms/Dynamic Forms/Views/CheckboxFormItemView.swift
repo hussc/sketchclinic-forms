@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SketchClinicFoundation
 
 public struct CheckboxFormItemView: FormItemViewProtocol {
     public enum CheckboxStyle {

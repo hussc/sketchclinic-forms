@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import SketchClinicFoundation
 
 struct FlowLayoutView<Data, ItemView: View>: View {
     

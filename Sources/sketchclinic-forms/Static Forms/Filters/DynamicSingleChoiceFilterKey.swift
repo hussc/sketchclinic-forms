@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SketchClinicFoundation
 
 public protocol DynamicSingleChoiceFilterKey<Choice>: PresentableFilterKey where Value == Choice {
     associatedtype Choice: ChoiceItem

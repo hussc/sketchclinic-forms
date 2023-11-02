@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SketchClinicFoundation
 
 struct ToggleFilterItemView<Key: ToggleFilterKey>: FilterItemView {
     @EnvironmentObject var filterResult: FilterResult

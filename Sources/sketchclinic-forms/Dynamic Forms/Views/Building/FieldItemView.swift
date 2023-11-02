@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import SketchClinicFoundation
 
 struct FieldItem {
     let identifier: String

@@ -35,15 +35,3 @@ extension Double: FilterValueEncodable {
         self
     }
 }
-
-extension ChoiceItem {
-    public func encodedValueForFilter() -> Any {
-        id
-    }
-}
-
-extension Array: FilterValueEncodable where Self.Element: ChoiceItem {
-    public func encodedValueForFilter() -> Any {
-        self.map { $0.encodedValueForFilter() }
-    }
-}

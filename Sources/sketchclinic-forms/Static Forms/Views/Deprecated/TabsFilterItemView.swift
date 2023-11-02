@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SketchClinicFoundation
 
 struct TabsFilterItemView<Key: SingleChoiceFilterKey>: FilterItemView {
     typealias Value = Key.Choice

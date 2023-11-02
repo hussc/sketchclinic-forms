@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import SketchClinicFoundation
 
 public protocol ChoicesFilterKey<Choice>: PresentableFilterKey where Value == [Choice] {
     associatedtype Choice: ChoiceItem

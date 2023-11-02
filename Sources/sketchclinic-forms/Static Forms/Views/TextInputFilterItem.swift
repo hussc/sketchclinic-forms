@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import SketchClinicFoundation
 
 struct TextInputFilterItem<Key: TextFilterKey>: FilterItemView {
     typealias Value = String

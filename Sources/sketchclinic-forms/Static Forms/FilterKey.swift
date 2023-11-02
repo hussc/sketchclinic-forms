@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import SketchClinicFoundation
 
 ///  A Filter key is a key for filtering a content bounded to a specific value produced and stored inside the **FilterResult**
 ///  A key should be a lightweight value type that can be created and destroyed without side effects

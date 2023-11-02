@@ -11,6 +11,7 @@ import Foundation
 
 import AuroraUI
 import SwiftUI
+import SketchClinicFoundation
 
 struct FiltersStyles {
 
@@ -26,6 +27,7 @@ struct FiltersStyles {
 
 #else
 import SwiftUI
+import SketchClinicFoundation
 
 struct FilterStylesEnvironmentKey: EnvironmentKey {
     static var defaultValue: FiltersStyles = .init()
@@ -41,20 +43,20 @@ extension EnvironmentValues {
 }
 
 struct FiltersStyles {
-    var textColor: Color = .black
-    var secondaryTextColor: Color = .gray
-    
-    var accentColor: Color = .blue
+    var textColor: Color = .textPrimary
+    var secondaryTextColor: Color = .textSecondary
 
-    var backgroundColor: Color = .white
-    var secondaryBackgroundColor: Color = .gray
+    var accentColor: Color = .textPrimary
 
-    var placeholderColor: Color = .gray
-    var borders: Color = .gray
+    var backgroundColor: Color = .backgroundPrimary
+    var secondaryBackgroundColor: Color = .backgroundSecondary
 
-    var bodyFont: Font = .body
-    var headlineFont: Font = .headline
-    var subheadlineFont: Font = .subheadline
+    var placeholderColor: Color = .textSecondary
+    var borders: Color = .customBorder
+
+    var bodyFont: Font = .bodyFont
+    var headlineFont: Font = .headlineFont
+    var subheadlineFont: Font = .subHeadlineFont
 }
 
 #endif

@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import SketchClinicFoundation
 
 struct BubbleChoicesFilterItem<Key: ChoicesFilterKey>: FilterItemView {
     typealias Value = [Key.Choice]

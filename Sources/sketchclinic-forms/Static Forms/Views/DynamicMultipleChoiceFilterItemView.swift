@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SketchClinicFoundation
 
 struct DynamicMultipleChoiceFilterItemView<Key: DynamicChoicesFilterKey>: FilterItemView {
     typealias Choice = Key.Choice
@@ -101,7 +102,7 @@ fileprivate extension Array where Element: Equatable {
 }
 
 #Preview {
-    struct MockChoiceItem: ChoiceItem {
+    struct MockChoiceItem: ChoiceItem, FilterValueEncodable {
         var title: String
         var id: String { title }
     }

@@ -7,7 +7,6 @@ final class JSONRendererTests: XCTestCase {
         let form = constructStandardSampleForm()
         
         let encoder = JSONEncoder()
-        encoder.outputFormatting = .prettyPrinted
         let data = try encoder.encode(form)
         
         let outputString = String(data: data, encoding: .utf8)

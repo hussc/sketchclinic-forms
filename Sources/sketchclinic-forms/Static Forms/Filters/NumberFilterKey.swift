@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SketchClinicFoundation
 
 public protocol NumberFilterKey: FilterKey<Double>, PresentableFilterKey {
     var placeholder: String { get }

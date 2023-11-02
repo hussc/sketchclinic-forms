@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import SketchClinicFoundation
 
 public struct FiltersPoolPreferences: Codable, PreferenceKey {
     public typealias Value = Set<AnyFilterKey>

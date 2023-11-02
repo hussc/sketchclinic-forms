@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SketchClinicFoundation
 
 struct DynamicSingleChoiceFilterItemView<Key: DynamicSingleChoiceFilterKey>: FilterItemView {
     typealias Choice = Key.Choice
@@ -94,7 +95,7 @@ struct DynamicSingleChoiceFilterItemView<Key: DynamicSingleChoiceFilterKey>: Fil
 
 
 #Preview {
-    struct MockChoiceItem: ChoiceItem {
+    struct MockChoiceItem: ChoiceItem, FilterValueEncodable {
         var title: String
         var id: String { title }
     }

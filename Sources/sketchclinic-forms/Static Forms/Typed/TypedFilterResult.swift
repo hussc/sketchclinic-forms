@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import SketchClinicFoundation
 
 open class TypedFilterResult<T: Codable>: FilterResult {
     @Published public var canSubmit: Bool = false

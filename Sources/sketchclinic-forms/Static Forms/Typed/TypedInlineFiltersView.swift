@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SketchClinicFoundation
 
 public struct TypedInlineFiltersView<T: Codable, ContentView: View>: View {
     @StateObject var filterResult: TypedFilterResult<T>

@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SketchClinicFoundation
 
 struct NumberInputFilterItem<Key: NumberFilterKey>: FilterItemView {
     typealias Value = String

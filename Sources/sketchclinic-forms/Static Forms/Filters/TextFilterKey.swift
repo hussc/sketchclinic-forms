@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import SketchClinicFoundation
 
 public protocol TextFilterKey: FilterKey<String>, PresentableFilterKey {
     var placeholder: String { get }

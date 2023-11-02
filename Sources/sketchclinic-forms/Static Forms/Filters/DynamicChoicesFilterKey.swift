@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SketchClinicFoundation
 import SwiftUI
 
 public protocol DynamicChoicesFilterKey<Choice>: PresentableFilterKey where Value == [Choice] {

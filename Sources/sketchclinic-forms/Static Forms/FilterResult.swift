@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import SketchClinicFoundation
 import Combine
 
 open class FilterResult: FilterResultProtocol, ObservableObject {

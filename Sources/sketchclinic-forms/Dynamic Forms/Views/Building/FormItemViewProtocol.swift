@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SketchClinicFoundation
 
 public protocol FormItemViewProtocol: View {
     associatedtype Item: FormItemProtocol

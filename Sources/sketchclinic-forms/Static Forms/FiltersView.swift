@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import SketchClinicFoundation
 
 /**
  A filters view is a container for multiple filters, you generally specify when to update the results with new keys and their corrosponding values anytime you want.

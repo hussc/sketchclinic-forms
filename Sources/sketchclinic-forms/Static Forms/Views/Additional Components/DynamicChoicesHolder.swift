@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import SketchClinicFoundation
 import Combine
 
 public final class DynamicChoicesHolder<Choice: ChoiceItem>: ObservableObject {

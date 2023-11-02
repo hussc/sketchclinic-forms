@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SketchClinicFoundation
 import MarkdownUI
 
 public struct DescriptionFormItemView: FormItemViewProtocol {

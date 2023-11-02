@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import SketchClinicFoundation
 
 public struct FilterSubmitButtonStyle: ButtonStyle {
     @Environment(\.styles) var styles

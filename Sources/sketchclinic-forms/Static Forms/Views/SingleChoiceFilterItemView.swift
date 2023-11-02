@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SketchClinicFoundation
 
 struct SingleChoiceFilterItemView<Key: SingleChoiceFilterKey>: FilterItemView {
     typealias Choice = Key.Choice
@@ -44,7 +45,7 @@ struct SingleChoiceFilterItemView<Key: SingleChoiceFilterKey>: FilterItemView {
 }
 
 #Preview {
-    struct MockChoiceItem: ChoiceItem {
+    struct MockChoiceItem: ChoiceItem, FilterValueEncodable {
         var title: String { "Choice " }
         var id: String { title }
     }

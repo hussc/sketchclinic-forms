@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SketchClinicFoundation
 
 extension Date: FilterValueEncodable {
     public static var dateFormatter: DateFormatter = {

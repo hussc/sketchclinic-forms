@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SketchClinicFoundation
 
 public struct InlineFiltersView<Content: View>: View {
     @StateObject private var filterResult: FilterResult

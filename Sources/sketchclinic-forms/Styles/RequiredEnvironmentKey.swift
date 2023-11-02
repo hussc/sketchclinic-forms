@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SketchClinicFoundation
 
 private struct IsRequiredEnvironmentKey: EnvironmentKey {
     static var defaultValue: Bool = false

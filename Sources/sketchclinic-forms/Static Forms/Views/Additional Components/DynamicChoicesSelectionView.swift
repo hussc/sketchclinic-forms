@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SketchClinicFoundation
 
 /// What we need to add
 /// - SearchView if the content exceeded 10 rows
