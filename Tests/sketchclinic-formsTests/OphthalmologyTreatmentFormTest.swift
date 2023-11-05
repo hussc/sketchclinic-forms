@@ -1,5 +1,6 @@
 import XCTest
 @testable import SketchClinicForms
+import SwiftUI
 
 final class OphthalmologyTreatmentFormTest: XCTestCase {
     func testExample() throws {
@@ -197,7 +198,7 @@ let AC = [
     FormChoiceItem(title: "Flare (particles of protein) in the aqueous Posterior"),
     FormChoiceItem(title: "Others")
 ]
-let iris = [   
+let iris = [
     FormChoiceItem(title: "Normal"),
     FormChoiceItem(title: "Clear"),
     FormChoiceItem(title: "Iritis"),
@@ -217,7 +218,7 @@ let iris = [
     FormChoiceItem(title: "Others"),
     FormChoiceItem(title: "NO NVI")
 ]
-let pupil = [  
+let pupil = [
     FormChoiceItem(title: "(Empty)"),
     FormChoiceItem(title: "Clear"),
     FormChoiceItem(title: "Normal"),
@@ -263,42 +264,34 @@ func ophtholmologyFormTest() -> FormContainer {
     let RightEyeStep = FormStepContainer(title: "Right Eye") {
         SingleChoiceFormItem(title: "Visual Acuity", order: 1, choices: visualAcuity)
         BooleanFormItem(title: "with pinhole", placeholder: "with pinhole")
-        TextFormItem(title: "Glasses", placeholder: "Right Eye")
-        TextFormItem(title: "Refraction", placeholder: "Right Eye")
-        SingleChoiceFormItem(title: "IOB RE", order: 1, choices: iob)
-        BooleanFormItem(title: "right Eye", placeholder: "Right Eye")
-        BooleanFormItem(title: "Left Eye", placeholder: "Left Eye")
-        MultipleChoicesFormItem(title: "Eyelid right Eye", order: 2, choices: eyeLid)
-        BooleanFormItem(title: "right Eye", placeholder: "Right Eye")
-        BooleanFormItem(title: "Left Eye", placeholder: "Left Eye")
-        MultipleChoicesFormItem(title: "Conjunctiva right Eye", order: 3, choices: conjunctivaSclera)
-        BooleanFormItem(title: "right Eye", placeholder: "Right Eye")
-        BooleanFormItem(title: "Left Eye", placeholder: "Left Eye")
+        SingleChoiceFormItem(title: "IOB RE", order: 2, choices: iob)
+        MultipleChoicesFormItem(title: "Eyelid right Eye", order: 3, choices: eyeLid)
+        MultipleChoicesFormItem(title: "Conjunctiva right Eye", order: 4, choices: conjunctivaSclera)
         MultipleChoicesFormItem(title: "Cornea right Eye", order: 4, choices: cornea)
-        BooleanFormItem(title: "right Eye", placeholder: "Right Eye")
-        BooleanFormItem(title: "Left Eye", placeholder: "Left Eye")
         MultipleChoicesFormItem(title: "AC right Eye", order: 5, choices: AC)
-        BooleanFormItem(title: "right Eye", placeholder: "Right Eye")
-        BooleanFormItem(title: "Left Eye", placeholder: "Left Eye")
         MultipleChoicesFormItem(title: "Iris right Eye", order: 6, choices: iris)
-        BooleanFormItem(title: "right Eye", placeholder: "Right Eye")
-        BooleanFormItem(title: "Left Eye", placeholder: "Left Eye")
         MultipleChoicesFormItem(title: "Pupil right Eye", order: 7, choices: pupil)
-        BooleanFormItem(title: "right Eye", placeholder: "Right Eye")
-        BooleanFormItem(title: "Left Eye", placeholder: "Left Eye")
         MultipleChoicesFormItem(title: "Lens right Eye", order: 8, choices: lens)
-        BooleanFormItem(title: "right Eye", placeholder: "Right Eye")
-        BooleanFormItem(title: "Left Eye", placeholder: "Left Eye")
         MultipleChoicesFormItem(title: "Ocular Motility right Eye", order: 9, choices: ocularMotility)
-        BooleanFormItem(title: "right Eye", placeholder: "Right Eye")
-        BooleanFormItem(title: "Left Eye", placeholder: "Left Eye")
         TextFormItem(title: "Fundus", placeholder: "Right Eye")
         LongTextFormItem(title: "Remarks", placeholder: "Right Eye")
         LongTextFormItem(title: "Assembly And Plan", placeholder: "Assembly And Plan")
     }
     let leftEye = FormStepContainer(title: "Left Eye") {
-        SingleChoiceFormItem(title: "Visual Acuity", order: 2, choices: visualAcuity)
+        SingleChoiceFormItem(title: "Visual Acuity", order: 1, choices: visualAcuity)
+        BooleanFormItem(title: "with pinhole", placeholder: "with pinhole")
         SingleChoiceFormItem(title: "IOB RE", order: 1, choices: iob)
+        MultipleChoicesFormItem(title: "Eyelid right Eye", order: 2, choices: eyeLid)
+        MultipleChoicesFormItem(title: "Conjunctiva right Eye", order: 3, choices: conjunctivaSclera)
+        MultipleChoicesFormItem(title: "Cornea right Eye", order: 4, choices: cornea)
+        MultipleChoicesFormItem(title: "AC right Eye", order: 5, choices: AC)
+        MultipleChoicesFormItem(title: "Iris right Eye", order: 6, choices: iris)
+        MultipleChoicesFormItem(title: "Pupil right Eye", order: 7, choices: pupil)
+        MultipleChoicesFormItem(title: "Lens right Eye", order: 8, choices: lens)
+        MultipleChoicesFormItem(title: "Ocular Motility right Eye", order: 9, choices: ocularMotility)
+        TextFormItem(title: "Fundus", placeholder: "Right Eye")
+        LongTextFormItem(title: "Remarks", placeholder: "Right Eye")
+        LongTextFormItem(title: "Assembly And Plan", placeholder: "Assembly And Plan")
     }
     return FormContainer(id: "ophthalmology-diagnosis", title: "Eye Examination") {
         RightEyeStep
