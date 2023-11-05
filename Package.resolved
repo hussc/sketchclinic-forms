@@ -10,6 +10,15 @@
       }
     },
     {
+      "identity" : "compactslider",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/buh/CompactSlider.git",
+      "state" : {
+        "revision" : "6d591a76caecd583ad69fbcd06f2fb83135318c0",
+        "version" : "1.1.5"
+      }
+    },
+    {
       "identity" : "kingfisher",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/onevcat/Kingfisher.git",
@@ -33,7 +42,7 @@
       "location" : "https://github.com/hussc/sketchclinicfoundation",
       "state" : {
         "branch" : "main",
-        "revision" : "d121ddd4bc1257984b831ad7f3a5d2eb60c7914b"
+        "revision" : "ab1319e9ae08b46a303075594b597556939e1197"
       }
     },
     {

@@ -17,7 +17,7 @@ struct LongTextFormItemView: FormItemViewProtocol {
     }
 
     public var body: some View {
-        FieldItemView(field: .init(identifier: item.id, name: item.title, icon: nil), text: _item.value)
+        LongTextInputView(title: item.placeholder, icon: nil, text: $item.value)
     }
 }
 

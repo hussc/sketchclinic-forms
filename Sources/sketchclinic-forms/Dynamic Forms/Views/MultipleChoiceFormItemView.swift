@@ -8,7 +8,9 @@
 import SwiftUI
 import SketchClinicFoundation
 
-struct MultipleChoiceFormItemView: FormItemViewProtocol {
+extension FormChoiceItem: ChoiceItem { }
+
+public struct MultipleChoiceFormItemView: FormItemViewProtocol {
     @Environment(\.accent) var accent
     @Binding var item: MultipleChoicesFormItem
 
@@ -17,30 +19,13 @@ struct MultipleChoiceFormItemView: FormItemViewProtocol {
     }
 
     public var body: some View {
-        VStack(alignment: .leading, spacing: Paddings.small) {
-            ForEach(item.choices) { choice in
-                let isChecked = item.value.contains(choice)
-                
-                HStack(spacing: Paddings.small) {
-                    Image(systemName: isChecked ? "checkmark.square.fill" : "square")
-                        .symbolRenderingMode(.hierarchical)
-                        .font(.title2.weight(.medium))
-                        .foregroundColor(accent)
-                    Text(choice.title)
-                        .foregroundColor(.textPrimary)
-                        .font(.bodyFont)
-                }
-                .onTapGesture {
-                    if let index = item.value.firstIndex(of: choice) {
-                        item.value.remove(at: index)
-                    } else {
-                        item.value.append(choice)
-                    }
-                }
-               
-            }
+        if item.choices.count > 4 {
+            DynamicChoicesInputView(placeholder: item.title, loading: { item.choices }, selectedChoices: $item.value)
+            .formBackground(title: item.title)
+        } else {
+            ChoicesInputView(choices: item.choices, selectedChoices: $item.value)
+                .formBackground(title: item.title)
         }
-        .formBackground(title: item.title)
     }
 }
 

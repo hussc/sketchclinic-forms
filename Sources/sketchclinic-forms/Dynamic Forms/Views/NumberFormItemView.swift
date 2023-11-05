@@ -16,9 +16,7 @@ public struct NumberFormItemView: FormItemViewProtocol {
     }
 
     public var body: some View {
-        TextField(item.placeholder, value: $item.value, format: .number)
-            .keyboardType(.numberPad)
-            .font(.bodyFont)
+        NumberInputView(minValue: 0, maxValue: 10, step: 1, value: $item.value)
             .formBackground(title: item.title)
     }
 }

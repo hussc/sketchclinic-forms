@@ -16,8 +16,7 @@ public struct TextInputFormItemView: FormItemViewProtocol {
     }
 
     public var body: some View {
-        TextField(item.placeholder, text: _item.value)
-            .font(.bodyFont)
+        TextInputView(placeholder: item.placeholder, text: $item.value)
             .formBackground(title: item.title)
     }
 }

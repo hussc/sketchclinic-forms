@@ -9,14 +9,6 @@ import SwiftUI
 import SketchClinicFoundation
 
 public struct CheckboxFormItemView: FormItemViewProtocol {
-    public enum CheckboxStyle {
-        case square
-        case circle
-    }
-    
-    let style: CheckboxStyle = .square
-
-    @Environment(\.accent) var accent
     @Binding var item: BooleanFormItem
     
     public init(item: Binding<BooleanFormItem>) {
@@ -24,17 +16,8 @@ public struct CheckboxFormItemView: FormItemViewProtocol {
     }
     
     public var body: some View {
-        HStack(spacing: Paddings.small) {
-            Image(systemName: item.value ? style.selectedImageName : style.unselectedImageName)
-                .symbolRenderingMode(.hierarchical)
-                .font(.title2.weight(.medium))
-                .foregroundColor(accent)
-            Text(item.placeholder)
-                .font(.bodyFont)
-                .foregroundColor(.textPrimary)
-        }
-        .formBackground(title: item.title)
-        .onTapGesture { item.value.toggle() }
+        CheckboxInputView(title: item.placeholder, isChecked: $item.value)
+            .formBackground(title: item.title)
     }
 }
 
@@ -44,24 +27,4 @@ public struct CheckboxFormItemView: FormItemViewProtocol {
     
     return CheckboxFormItemView(item: .constant(mockItem))
         .accent(.messageSuccess)
-}
-
-extension CheckboxFormItemView.CheckboxStyle {
-    var selectedImageName: String {
-        switch self {
-        case .square:
-            return "checkmark.square.fill"
-        case .circle:
-            return "checkmark.circle.fill"
-        }
-    }
-    
-    var unselectedImageName: String {
-        switch self {
-        case .square:
-            return "square"
-        case .circle:
-            return "circle"
-        }
-    }
 }

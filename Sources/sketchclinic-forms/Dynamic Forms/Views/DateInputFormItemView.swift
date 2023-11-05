@@ -9,7 +9,6 @@ import SwiftUI
 import SketchClinicFoundation
 
 public struct DateInputFormItemView: FormItemViewProtocol {
-    @Environment(\.accent) var accent
     @Binding var item: DateFormItem
 
     public init(item: Binding<DateFormItem>) {
@@ -17,13 +16,8 @@ public struct DateInputFormItemView: FormItemViewProtocol {
     }
 
     public var body: some View {
-        DatePicker(selection: _item.value, displayedComponents: .date) {
-            EmptyView()
-        }
-        .datePickerStyle(.wheel)
-        .tint(accent)
-        .labelsHidden()
-        .formBackground(title: item.title)
+        DateInputView(date: $item.value)
+            .formBackground(title: item.title)
     }
 }
 

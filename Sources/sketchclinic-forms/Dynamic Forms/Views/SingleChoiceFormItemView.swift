@@ -9,8 +9,6 @@ import SwiftUI
 import SketchClinicFoundation
 
 public struct SingleChoiceFormItemView: FormItemViewProtocol {
-    @Environment(\.accent) var accent
-    
     @Binding var item: SingleChoiceFormItem
     
     public init(item: Binding<SingleChoiceFormItem>) {
@@ -18,22 +16,14 @@ public struct SingleChoiceFormItemView: FormItemViewProtocol {
     }
 
     public var body: some View {
-        VStack(alignment: .leading, spacing: Paddings.small) {
-            ForEach(item.choices) { choice in
-                let isChecked = item.value == choice
-                
-                HStack(spacing: Paddings.small) {
-                    Image(systemName: isChecked ? "checkmark.circle.fill" : "circle")
-                        .symbolRenderingMode(.hierarchical)
-                        .font(.title2.weight(.medium))
-                        .foregroundColor(accent)
-                    Text(choice.title)
-                        .font(.bodyFont)
-                        .foregroundColor(.textPrimary)
-                }
-                .onTapGesture { item.value = choice }
-            }
-        }.formBackground(title: item.title)
+        if item.choices.count > 4 {
+            DynamicChoicesInputView(placeholder: item.title, loading: { item.choices }, selectedChoice: $item.value)
+            .formBackground(title: item.title)
+
+        } else {
+            ChoicesInputView(choices: item.choices, selectedChoice: $item.value)
+                .formBackground(title: item.title)
+        }
     }
 }
 
