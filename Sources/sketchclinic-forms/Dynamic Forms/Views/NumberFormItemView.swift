@@ -16,11 +16,13 @@ public struct NumberFormItemView: FormItemViewProtocol {
     }
 
     public var body: some View {
-        NumberInputView(minValue: 0, maxValue: 10, step: 1, value: $item.value)
+        NumberInputView(minValue: 6, maxValue: 60, step: 1, value: $item.value)
             .formBackground(title: item.title)
     }
 }
 
 #Preview {
-    NumberFormItemView(item: .constant(.init(title: "Number Question", placeholder: "Enter a number", format: .decimal)))
+    let mockNumber = NumberFormItem(title: "Visual Acuity 6 / ", order: 1, format: .integer, placeholder: "6 / ??")
+
+    return NumberFormItemView(item: .constant(mockNumber))
 }

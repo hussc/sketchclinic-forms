@@ -9,6 +9,8 @@ import SwiftUI
 import SketchClinicFoundation
 
 public struct FormContainerView: View {
+    static var defaultIcon = "circle.lefthalf.filled.righthalf.striped.horizontal.inverse"
+
     public enum SaveMode {
         case draft
         case final
@@ -26,10 +28,12 @@ public struct FormContainerView: View {
     @State private var error: Error? = nil
     
     let save: SaveClousure
+    let showsStepsCount: Bool
     let completion: (FormContainer) -> Void
 
-    public init(form: FormContainer, save: @escaping SaveClousure, completion: @escaping (FormContainer) -> Void = { _ in }) {
+    public init(form: FormContainer, showsStepsCount: Bool = true, save: @escaping SaveClousure, completion: @escaping (FormContainer) -> Void = { _ in }) {
         self.save = save
+        self.showsStepsCount = showsStepsCount
         self.completion = completion
         self._form = .init(wrappedValue: form)
         self._editingStepIndex = .init(initialValue: 0)
@@ -37,13 +41,17 @@ public struct FormContainerView: View {
     
     public var body: some View {
         VStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: Paddings.mediumX) {
-                    StepView(stepsCount: form.steps.count, step: form.editingStep)
-                    Spacer()
+            VStack(alignment: .leading, spacing: Paddings.mediumX) {
+                SecondaryScreenHeader(title: "\(form.editingStep.order + 1). \(form.editingStep.title)", icon: form.editingStep.icon ?? Self.defaultIcon)
+
+                if showsStepsCount {
+                    SteppedProgressView(total: form.steps.count, step: form.editingStep.order)
                 }
+
+                StepView(step: form.editingStep)
+                Spacer()
             }
-            
+
             BottomBarView {
                 Button {
                     // forward to the next step if possible, otherwise save the visit
@@ -55,7 +63,7 @@ public struct FormContainerView: View {
                         }
                     }
                 } label: {
-                    Label(form.editingStep.order == form.steps.count - 1 ? "Save" : "Next", systemImage: form.editingStep.order == form.steps.count - 1 ? "checkmark" : "arrow.right")
+                    Label("Next", systemImage: "arrow.right")
                         .labelStyle(.trailingIcon)
                 }
                 .buttonStyle(.primary)
@@ -89,17 +97,10 @@ public struct FormContainerView: View {
 
 extension FormContainerView {
     struct StepView: View {
-        static var defaultIcon = "circle.lefthalf.filled.righthalf.striped.horizontal.inverse"
-        
-        let stepsCount: Int
         @ObservedObject var step: FormStepContainer
         
         var body: some View {
-            VStack(alignment: .leading, spacing: Paddings.mediumX) {
-                SecondaryScreenHeader(title: "\(step.order + 1). \(step.title)", icon: step.icon ?? Self.defaultIcon)
-                SteppedProgressView(total: stepsCount, step: step.order)
-                
-                // render the form fields here
+            ScrollView {
                 VStack(alignment: .leading, spacing: Paddings.medium) {
                     ForEach($step.fields) {
                         AnyFormItemView(item: $0.item)
