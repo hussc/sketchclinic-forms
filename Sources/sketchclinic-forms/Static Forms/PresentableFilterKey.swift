@@ -17,8 +17,10 @@ import SketchClinicFoundation
  */
 public protocol PresentableFilterKey: View, FilterKey {
     var title: String? { get }
+    var iconName: String? { get }
 }
 
 extension PresentableFilterKey {
     public var title: String? { nil }
+    public var iconName: String? { nil }
 }

@@ -19,6 +19,7 @@ extension ToggleFilterKey {
     public var body: some View {
         DefaultFilterViewDescriptor(
             title: title,
+            iconName: iconName,
             key: self,
             viewForFilterType: ToggleFilterItemView.self
         )

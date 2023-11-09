@@ -12,6 +12,7 @@ import SketchClinicFoundation
 public struct DefaultFilterViewDescriptor<Key: FilterKey, FilterView: FilterItemView<Key>>: FilterViewDesciptor {
     
     public let title: String?
+    public let iconName: String?
     public let key: Key
     public let viewForFilterType: FilterView.Type
     
@@ -21,7 +22,6 @@ public struct DefaultFilterViewDescriptor<Key: FilterKey, FilterView: FilterItem
     
     @ViewBuilder @MainActor public var body: some View {
         viewForFilter
-            .elementTitle(title)
-            .wrappedInFilterContainer()
+            .wrappedInFilterContainer(title: title, icon: iconName)
     }
 }

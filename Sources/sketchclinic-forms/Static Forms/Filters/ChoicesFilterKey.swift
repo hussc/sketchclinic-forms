@@ -20,6 +20,7 @@ extension ChoicesFilterKey {
     public var body: some View {
         DefaultFilterViewDescriptor(
             title: title,
+            iconName: iconName,
             key: self,
             viewForFilterType: MultipleChoiceFilterItemView.self
         )

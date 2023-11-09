@@ -11,14 +11,7 @@ import SketchClinicFoundation
 
 struct ToggleFilterItemView<Key: ToggleFilterKey>: FilterItemView {
     @EnvironmentObject var filterResult: FilterResult
-    @Environment(\.styles) var styles
 
-    enum CheckboxStyle {
-        case square
-        case circle
-    }
-
-    let style: CheckboxStyle = .square
     let key: Key
     
     init(key: Key) {
@@ -26,18 +19,7 @@ struct ToggleFilterItemView<Key: ToggleFilterKey>: FilterItemView {
     }
     
     var body: some View {
-        HStack(spacing: Paddings.small) {
-            Image(systemName: (filterResult[key] ?? false) ? style.selectedImageName : style.unselectedImageName)
-                .symbolRenderingMode(.hierarchical)
-                .font(.title2.weight(.medium))
-                .foregroundColor(styles.accentColor)
-            Text(key.text)
-                .font(.bodyFont)
-                .foregroundColor(.textPrimary)
-        }
-        .onTapGesture {
-            filterResult.setValue(value: !(filterResult[key] ?? false), for: key)
-        }
+        CheckboxInputView(title: key.text, isChecked: filterResult.binding(for: key, defaultValue: false))
     }
 }
 
@@ -51,25 +33,5 @@ struct ToggleFilterItemView_Previews: PreviewProvider {
     static var previews: some View {
         MockFilterKey()
             .environmentObject(FilterResult())
-    }
-}
-
-extension ToggleFilterItemView.CheckboxStyle {
-    var selectedImageName: String {
-        switch self {
-        case .square:
-            return "checkmark.square.fill"
-        case .circle:
-            return "checkmark.circle.fill"
-        }
-    }
-
-    var unselectedImageName: String {
-        switch self {
-        case .square:
-            return "square"
-        case .circle:
-            return "circle"
-        }
     }
 }

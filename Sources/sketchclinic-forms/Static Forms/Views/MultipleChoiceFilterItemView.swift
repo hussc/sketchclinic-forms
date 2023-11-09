@@ -24,38 +24,7 @@ struct MultipleChoiceFilterItemView<Key: ChoicesFilterKey>: FilterItemView {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: Paddings.small) {
-            ForEach(key.choices) { choice in
-                let isChecked = key.choices.contains(choice)
-
-                HStack(spacing: Paddings.small) {
-                    Image(systemName: isChecked ? "checkmark.square.fill" : "square")
-                        .symbolRenderingMode(.hierarchical)
-                        .font(.title2.weight(.medium))
-                        .foregroundColor(styles.accentColor)
-                    Text(choice.title)
-                        .foregroundColor(.textPrimary)
-                        .font(.bodyFont)
-                }
-                .onTapGesture {
-                    if let index = result.firstIndex(of: choice) {
-                        result.remove(at: index)
-                    } else {
-                        result.append(choice)
-                    }
-                }
-
-            }
-        }
-        .onChange(of: result) { newValue in
-            self.filterResult.setValue(value: newValue, for: self.key)
-        }.onAppear {
-            if let foundResult = filterResult.value(for: key) {
-                self.result = foundResult
-            }
-        }.onReceive(NotificationCenter.default.publisher(for: filtersShouldbeClearedNotification)) { _ in
-            result = filterResult.value(for: key) ?? []
-        }
+        ChoicesInputView(choices: key.choices, selectedChoices: filterResult.binding(for: key, defaultValue: []))
     }
 }
 

@@ -14,12 +14,6 @@ struct DynamicMultipleChoiceFilterItemView<Key: DynamicChoicesFilterKey>: Filter
     typealias Value = [Key.Choice]
     
     @EnvironmentObject private var filterResult: FilterResult
-    
-    @State private var selectedChoices: Array<Choice> = []
-    @State private var isSelectionSheetPresented: Bool = false
-    @State private var showResultsTitle = "apply".Localized()
-
-    @Environment(\.styles) var styles
 
     let key: Key
     let placeholder: String?
@@ -35,69 +29,9 @@ struct DynamicMultipleChoiceFilterItemView<Key: DynamicChoicesFilterKey>: Filter
     }
     
     var body: some View {
-        ZStack {
-            HStack(spacing: 0) {
-                Text(placeholderText)
-                    .font(styles.bodyFont)
-                    .foregroundColor(selectedChoices.isEmpty ? .textSecondary : styles.accentColor)
-                Spacer()
-                Image(systemName: "chevron.up.chevron.down")
-                    .font(.bodyFont)
-                    .foregroundColor(.textPrimary)
-            }.padding(.vertical, 8)
-        }.onTapGesture {
-            isSelectionSheetPresented = true
-        }.onChange(of: selectedChoices, perform: { newValue in
-            self.showResultsTitle = "Select (\(newValue.count))"
-        }).onAppear {
-            self.selectedChoices = filterResult.value(for: key) ?? []
-        }.sheet(isPresented: $isSelectionSheetPresented) {
-            DynamicChoicesSelectionView(title: placeholder ?? "", isMultiSelection: true, choicesHolder: key.choicesViewModel, showResultsTitle: $showResultsTitle) { holder, choice in
-                view(for: choice, holder: holder)
-            } onDismiss: { saveSelection in
-                if saveSelection {
-                    filterResult.setValue(value: selectedChoices, for: self.key)
-                } else {
-                    self.selectedChoices = []
-                }
-            }
-        }.onReceive(NotificationCenter.default.publisher(for: filtersShouldbeClearedNotification)) { _ in
-            selectedChoices = filterResult.value(for: key) ?? []
-        }
-    }
-
-    @ViewBuilder func view(for choice: Choice, holder: DynamicChoicesHolder<Choice>) -> some View {
-        VStack(alignment: .leading, spacing: 0) {
-            HStack(spacing: Paddings.smallX) {
-                Image(systemName: selectedChoices.contains(choice) ?  "checkmark.square.fill" : "square")
-                    .font(.bodyFont)
-                    .foregroundColor(styles.accentColor)
-                Text(choice.title)
-                    .font(selectedChoices.contains(choice) ? .headlineFont : .bodyFont)
-                    .foregroundColor(selectedChoices.contains(choice) ? styles.accentColor : .textPrimary)
-                Spacer()
-            }
-            .padding(.vertical, 16)
-            .padding(.horizontal, Paddings.medium)
-            .background {
-                RoundedRectangle(cornerRadius: 6)
-                    .fill(Color.backgroundSecondary)
-            }
-        }
-        .padding(.horizontal, 16)
-        .onTapGesture {
-            if let index = selectedChoices.firstIndex(of: choice) {
-                selectedChoices.remove(at: index)
-            } else {
-                selectedChoices.append(choice)
-            }
-        }
-    }
-}
-
-fileprivate extension Array where Element: Equatable {
-    func isLastElement(_ element: Element) -> Bool {
-        (firstIndex(of: element) == count - 1)
+        DynamicChoicesInputView(placeholder: placeholderText, loading: {
+            try await key.choices(for: filterResult)
+        }, selectedChoices: filterResult.binding(for: self.key, defaultValue: []))
     }
 }
 

@@ -23,24 +23,7 @@ struct SingleChoiceFilterItemView<Key: SingleChoiceFilterKey>: FilterItemView {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: Paddings.small) {
-            let choices = key.choices
-
-            ForEach(choices) { choice in
-                let isChecked = filtersResult[key] == choice
-
-                HStack(spacing: Paddings.small) {
-                    Image(systemName: isChecked ? "checkmark.circle.fill" : "circle")
-                        .symbolRenderingMode(.hierarchical)
-                        .font(.title2.weight(.medium))
-                        .foregroundColor(styles.accentColor)
-                    Text(choice.title)
-                        .font(.bodyFont)
-                        .foregroundColor(.textPrimary)
-                }
-                .onTapGesture { filtersResult.setValue(value: choice, for: key) }
-            }
-        }
+        ChoicesInputView(choices: key.choices, selectedChoice: filtersResult.binding(for: key))
     }
 }
 

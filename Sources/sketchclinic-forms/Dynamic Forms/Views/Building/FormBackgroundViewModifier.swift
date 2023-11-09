@@ -10,6 +10,8 @@ import SketchClinicFoundation
 
 
 public struct FormBackgroundViewModifier: ViewModifier {
+    @Environment(\.accent) var accent
+
     var title: String? = nil
     var icon: String? = nil
     var description: String? = nil
@@ -23,14 +25,23 @@ public struct FormBackgroundViewModifier: ViewModifier {
     public func body(content: Content) -> some View {
         HStack {
             VStack(alignment: .leading, spacing: Paddings.smallX) {
-                if !(title?.trimmed().isEmpty ?? true) {
-                    Text(title ?? "")
-                        .font(.headlineFont)
-                        .foregroundColor(.textPrimary)
+                HStack {
+                    if let icon, !(title?.trimmed().isEmpty ?? true) {
+                        Label(title ?? "", systemImage: icon)
+                            .font(.headlineFont)
+                            .foregroundColor(accent)
+                    } else {
+                        Text(title ?? "")
+                            .font(.headlineFont)
+                            .foregroundColor(accent)
+                    }
+
+                    Spacer()
                 }
                 
                 content
             }
+
             Spacer()
         }
         .padding(.horizontal, Paddings.medium)

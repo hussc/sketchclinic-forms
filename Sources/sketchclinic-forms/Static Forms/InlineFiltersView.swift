@@ -35,9 +35,11 @@ extension String {
 
 #Preview {
     struct MockNumberField: NumberFilterKey {
+        var minValue: Double { 0 }
+        var maxValue: Double { 10 }
+        var step: Double { 1 }
         var identifier: String { "number" }
         var title: String { "Number" }
-        var placeholder: String { "Enter a number" }
     }
 
     struct MockTextField: TextFilterKey {

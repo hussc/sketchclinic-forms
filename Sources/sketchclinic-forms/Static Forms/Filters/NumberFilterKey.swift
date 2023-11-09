@@ -9,14 +9,17 @@
 import SwiftUI
 import SketchClinicFoundation
 
-public protocol NumberFilterKey: FilterKey<Double>, PresentableFilterKey {
-    var placeholder: String { get }
+public protocol NumberFilterKey: FilterKey<Double>, PresentableFilterKey { 
+    var minValue: Double { get }
+    var maxValue: Double { get }
+    var step: Double { get }
 }
 
 extension NumberFilterKey {
     public var body: some View {
         DefaultFilterViewDescriptor(
             title: title,
+            iconName: iconName,
             key: self,
             viewForFilterType: NumberInputFilterItem.self)
     }

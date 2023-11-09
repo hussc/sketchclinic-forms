@@ -61,6 +61,7 @@ extension DateFilterKey {
     public var body: some View {
         DefaultFilterViewDescriptor(
             title: title,
+            iconName: iconName,
             key: self,
             viewForFilterType: DateInputFilterItemView.self
         )

@@ -24,8 +24,6 @@ struct NumberInputFilterItem<Key: NumberFilterKey>: FilterItemView {
     }
     
     var body: some View {
-        TextField(key.placeholder, value: filtersResult.binding(for: key, defaultValue: 0), format: .number)
-            .keyboardType(.numberPad)
-            .font(.bodyFont)
+        NumberInputView(minValue: key.minValue, maxValue: key.maxValue, step: key.step, value: filtersResult.binding(for: key, defaultValue: key.minValue))
     }
 }
