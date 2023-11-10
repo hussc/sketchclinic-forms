@@ -7,12 +7,14 @@
 
 import Foundation
 
-open class FormStepContainer: Codable, Equatable, Hashable {
+open class FormStepContainer: Codable, Equatable, Hashable, Identifiable {
     public var title: String
     public var description: String?
     public var icon: String?
     public var order: Int
-    
+
+    public var id: String { title + "\(order)" }
+
     @Published public var fields: [AnyFormItem]
     
     public static func == (lhs: FormStepContainer, rhs: FormStepContainer) -> Bool {

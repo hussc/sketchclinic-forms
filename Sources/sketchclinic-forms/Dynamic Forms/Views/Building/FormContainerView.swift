@@ -40,16 +40,15 @@ public struct FormContainerView: View {
     }
     
     public var body: some View {
-        VStack {
-            VStack(alignment: .leading, spacing: Paddings.mediumX) {
-                SecondaryScreenHeader(title: "\(form.editingStep.order + 1). \(form.editingStep.title)", icon: form.editingStep.icon ?? Self.defaultIcon)
+        VStack(alignment: .leading, spacing: Paddings.mediumX) {
+            SecondaryScreenHeader(title: "\(form.title)", icon: Self.defaultIcon)
 
-                if showsStepsCount {
-                    SteppedProgressView(total: form.steps.count, step: form.editingStep.order)
-                }
-
-                StepView(step: form.editingStep)
-                Spacer()
+            ScrollView {
+                VStack(alignment: .leading, spacing: Paddings.medium) {
+                    ForEach(form.steps) { step in
+                        StepView(step: step)
+                    }
+                }.padding(.horizontal, Paddings.medium)
             }
 
             BottomBarView {
@@ -100,13 +99,11 @@ extension FormContainerView {
         @ObservedObject var step: FormStepContainer
         
         var body: some View {
-            ScrollView {
-                VStack(alignment: .leading, spacing: Paddings.medium) {
-                    ForEach($step.fields) {
-                        AnyFormItemView(item: $0.item)
-                    }
-                }.padding(.horizontal, Paddings.medium)
-            }
+            VStack(alignment: .leading, spacing: Paddings.medium) {
+                ForEach($step.fields) {
+                    AnyFormItemView(item: $0.item)
+                }
+            }.padding(.horizontal, Paddings.medium)
         }
     }
 }

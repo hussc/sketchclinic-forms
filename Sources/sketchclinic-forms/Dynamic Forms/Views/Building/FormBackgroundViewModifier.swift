@@ -23,33 +23,24 @@ public struct FormBackgroundViewModifier: ViewModifier {
     }
 
     public func body(content: Content) -> some View {
-        HStack {
-            VStack(alignment: .leading, spacing: Paddings.smallX) {
-                HStack {
-                    if let icon, !(title?.trimmed().isEmpty ?? true) {
-                        Label(title ?? "", systemImage: icon)
-                            .font(.headlineFont)
-                            .foregroundColor(accent)
-                    } else {
-                        Text(title ?? "")
-                            .font(.headlineFont)
-                            .foregroundColor(accent)
-                    }
-
-                    Spacer()
+        VStack(alignment: .leading, spacing: Paddings.smallX) {
+            HStack {
+                if let icon, !(title?.trimmed().isEmpty ?? true) {
+                    Label(title ?? "", systemImage: icon)
+                        .font(.headlineFont)
+                        .foregroundColor(accent)
+                } else {
+                    Text(title ?? "")
+                        .font(.headlineFont)
+                        .foregroundColor(accent)
                 }
-                
-                content
+
+                Spacer()
             }
 
-            Spacer()
+            content
         }
-        .padding(.horizontal, Paddings.medium)
-        .padding(.vertical, Paddings.medium)
-        .background {
-            RoundedRectangle(cornerRadius: 6)
-                .foregroundColor(Color.backgroundSecondary)
-        }
+        .cardBackground()
     }
 }
 
