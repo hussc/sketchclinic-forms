@@ -23,7 +23,7 @@ public struct FormContainerView: View {
     
     @StateObject var form: FormContainer
     @State var editingStepIndex: Int
-    
+
     @State private var isLoading = false
     @State private var error: Error? = nil
     
@@ -43,24 +43,33 @@ public struct FormContainerView: View {
         VStack(alignment: .leading, spacing: Paddings.mediumX) {
             SecondaryScreenHeader(title: "\(form.title)", icon: Self.defaultIcon)
 
-            ScrollView {
-                VStack(alignment: .leading, spacing: Paddings.medium) {
-                    ForEach(form.steps) { step in
-                        StepView(step: step)
+            VStack(alignment: .leading, spacing: Paddings.medium) {
+                PageSwitchingView(pages: form.steps, selectedPage: .init(get: {
+                    form.steps[editingStepIndex]
+                }, set: { step in
+                    guard let index = form.steps.firstIndex(where: { $0.id == step.id }) else {
+                        return
                     }
-                }.padding(.horizontal, Paddings.medium)
+
+                    editingStepIndex = index
+                })).padding(.horizontal, Paddings.medium)
+
+                TabView(selection: $editingStepIndex) {
+                    ForEach(Array(zip(form.steps.indices, form.steps)), id: \.0) { stepAndIndex in
+                        let step = stepAndIndex.1
+                        let index = stepAndIndex.0
+
+                        StepView(step: step)
+                            .padding(.horizontal, Paddings.medium)
+                            .tag(index)
+                    }
+                }.tabViewStyle(.page(indexDisplayMode: .never))
             }
 
             BottomBarView {
                 Button {
                     // forward to the next step if possible, otherwise save the visit
-                    if form.editingStep.order == form.steps.count - 1 {
-                        saveAndDismiss(mode: .final)
-                    } else {
-                        saveAnd {
-                            self.form.editingStep = form.steps[form.editingStep.order + 1]
-                        }
-                    }
+                    saveAndDismiss(mode: .final)
                 } label: {
                     Label("Next", systemImage: "arrow.right")
                         .labelStyle(.trailingIcon)
@@ -99,42 +108,21 @@ extension FormContainerView {
         @ObservedObject var step: FormStepContainer
         
         var body: some View {
-            VStack(alignment: .leading, spacing: Paddings.medium) {
-                ForEach($step.fields) {
-                    AnyFormItemView(item: $0.item)
+            ScrollView {
+                VStack(alignment: .leading, spacing: Paddings.medium) {
+                    ForEach($step.fields) {
+                        AnyFormItemView(item: $0.item)
+                    }
                 }
-            }.padding(.horizontal, Paddings.medium)
+            }.scrollIndicators(.hidden)
         }
     }
 }
 
 #Preview {
-    let step1 = FormStepContainer(title: "Step 1", icon: "", order: 1, fields: [
-        DescriptionFormItem(text: "This is a description"),
-        
-        TextFormItem(title: "Enter your name", placeholder: "Name"),
-        BooleanFormItem(placeholder: "Do you love me?")
-     ])
-    
-    let step2 = FormStepContainer(title: "Step 1", icon: "", order: 1, fields: [
-        DescriptionFormItem(text: "This is a description"),
-        
-        BooleanFormItem(placeholder: "Do you love me?"),
-        NumberFormItem(title: "Enter your age", placeholder: "Age", format: .integer),
-        
-        MultipleChoicesFormItem(title: "Pick one of tehse") {
-            FormChoiceItem(title: "Hussein", order: 1)
-            FormChoiceItem(title: "Hussein 2", order: 2)
-            FormChoiceItem(title: "Hussein 3", order: 3)
-        }
-     ])
-    
-    let form = FormContainer(id: "mock-form", title: "Mock Form") {
-        step1
-        step2
-    }
-    
-    return FormContainerView(form: form){ _, _ in
-        
+    return FormContainerView(form: .opthalmology){ _, _ in
+
     }
 }
+
+extension FormStepContainer: ChoiceItem { }

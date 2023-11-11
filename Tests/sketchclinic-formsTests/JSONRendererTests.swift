@@ -4,7 +4,7 @@ import XCTest
 
 final class JSONRendererTests: XCTestCase {
     func testJSONRendering() throws {
-        let form = constructStandardSampleForm()
+        let form = FormContainer.opthalmology
         
         let encoder = JSONEncoder()
         let data = try encoder.encode(form)

@@ -32,7 +32,7 @@ public struct FormBackgroundViewModifier: ViewModifier {
                 } else {
                     Text(title ?? "")
                         .font(.headlineFont)
-                        .foregroundColor(accent)
+                        .foregroundColor(.textPrimary)
                 }
 
                 Spacer()

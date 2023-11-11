@@ -8,7 +8,6 @@
 import SwiftUI
 import SketchClinicFoundation
 
-
 struct LongTextFormItemView: FormItemViewProtocol {
     @Binding var item: LongTextFormItem
 
@@ -17,7 +16,7 @@ struct LongTextFormItemView: FormItemViewProtocol {
     }
 
     public var body: some View {
-        LongTextInputView(title: item.placeholder, icon: nil, text: $item.value)
+        LongTextInputView(title: item.placeholder, icon: "doc.plaintext", text: $item.value)
     }
 }
 
