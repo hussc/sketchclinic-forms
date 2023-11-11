@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import SketchClinicFoundation
 
 public protocol FormItemProtocol: Codable, FormTypeIdentifiable {
     var title: String { get set }

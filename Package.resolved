@@ -1,0 +1,68 @@
+{
+  "pins" : [
+    {
+      "identity" : "alerttoast",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/elai950/AlertToast.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "638f38f9daf08e17b7caea22d2fcb9c0a418d1b6"
+      }
+    },
+    {
+      "identity" : "compactslider",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/buh/CompactSlider.git",
+      "state" : {
+        "revision" : "6d591a76caecd583ad69fbcd06f2fb83135318c0",
+        "version" : "1.1.5"
+      }
+    },
+    {
+      "identity" : "kingfisher",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/onevcat/Kingfisher.git",
+      "state" : {
+        "revision" : "277f1ab2c6664b19b4a412e32b094b201e2d5757",
+        "version" : "7.10.0"
+      }
+    },
+    {
+      "identity" : "networkimage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/gonzalezreal/NetworkImage",
+      "state" : {
+        "revision" : "7aff8d1b31148d32c5933d75557d42f6323ee3d1",
+        "version" : "6.0.0"
+      }
+    },
+    {
+      "identity" : "sketchclinicfoundation",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/hussc/sketchclinicfoundation",
+      "state" : {
+        "branch" : "main",
+        "revision" : "55bba69c0e8e6384755208e2a8cd2cbf15076d8e"
+      }
+    },
+    {
+      "identity" : "swift-collections",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-collections.git",
+      "state" : {
+        "revision" : "a902f1823a7ff3c9ab2fba0f992396b948eda307",
+        "version" : "1.0.5"
+      }
+    },
+    {
+      "identity" : "swift-markdown-ui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/gonzalezreal/swift-markdown-ui",
+      "state" : {
+        "revision" : "5df8a4adedd6ae4eb2455ef60ff75183984daeb8",
+        "version" : "2.2.0"
+      }
+    }
+  ],
+  "version" : 2
+}

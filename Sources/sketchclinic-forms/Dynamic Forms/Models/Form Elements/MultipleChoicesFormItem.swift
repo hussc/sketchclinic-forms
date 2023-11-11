@@ -28,7 +28,15 @@ extension MultipleChoicesFormItem {
         self.defaultValue = nil
         self.value = []
     }
-    
+
+    public init(title: String, choices: [FormChoiceItem]) {
+        self.title = title
+        self.order = 0
+        self.choices = choices
+        self.defaultValue = nil
+        self.value = []
+    }
+
     public func defaultValue(@FormChoicesBuilder _ choices: () -> [FormChoiceItem]) -> Self {
         var copy = self
         copy.defaultValue = choices()

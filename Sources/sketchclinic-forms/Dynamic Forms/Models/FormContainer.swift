@@ -7,11 +7,18 @@
 
 import Foundation
 
-open class FormContainer: ObservableObject, Identifiable, Codable, Equatable {
+open class FormContainer: ObservableObject, Identifiable, Codable, Hashable {
     public static func == (lhs: FormContainer, rhs: FormContainer) -> Bool {
         return lhs.id == rhs.id && lhs.version == rhs.version && lhs.title == rhs.title && lhs.steps == rhs.steps
     }
-    
+
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(version)
+        hasher.combine(title)
+        hasher.combine(steps)
+    }
+
     public var id: String
     public var version: String
     public var title: String

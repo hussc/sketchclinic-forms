@@ -11,7 +11,7 @@ import XCTest
 
 class MarkdownRendererTests: XCTestCase {
     func testMarkdownRendering() throws {
-        let form = constructSampleForm()
+        let form = FormContainer.opthalmology
         
         let renderer = MarkdownFormContainerRenderer()
         let output = try renderer.render(form: form)

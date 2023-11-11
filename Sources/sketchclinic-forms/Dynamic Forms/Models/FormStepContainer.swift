@@ -7,18 +7,27 @@
 
 import Foundation
 
-open class FormStepContainer: Codable, Equatable {
+open class FormStepContainer: Codable, Equatable, Hashable, Identifiable {
     public var title: String
     public var description: String?
     public var icon: String?
     public var order: Int
-    
+
+    public var id: String { title + "\(order)" }
+
     @Published public var fields: [AnyFormItem]
     
     public static func == (lhs: FormStepContainer, rhs: FormStepContainer) -> Bool {
         lhs.title == rhs.title && lhs.description == rhs.description && lhs.icon == rhs.icon && lhs.order == rhs.order
     }
-    
+
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(title)
+        hasher.combine(description)
+        hasher.combine(icon)
+        hasher.combine(order)
+    }
+
     public init(title: String, description: String? = nil, icon: String? = nil, order: Int, fields: [FormItemProtocol]) {
         self.title = title
         self.description = description
@@ -63,5 +72,6 @@ extension FormStepContainer {
 
 #if canImport(SwiftUI)
 import SwiftUI
+import SketchClinicFoundation
 extension FormStepContainer: ObservableObject { }
 #endif
