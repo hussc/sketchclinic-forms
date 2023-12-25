@@ -51,20 +51,21 @@ open class FilterResult: FilterResultProtocol, ObservableObject {
     }
     
     public func setValue<Key: FilterKey>(value: Key.Value?, for key: Key) {
-        guard let value else {
-            self.storage.removeValue(forKey: .init(key: key))
-            return
-        }
+//        guard let value else {
+//            self.storage.removeValue(forKey: .init(key: key))
+//            return
+//        }
         
         self.storage[.init(key: key)] = value
         isContentFiltered = !isEmpty
     }
     
     public func setDefaultValue<Key: FilterKey>(value: Key.Value?, for key: Key) {
-        guard let value else {
-            self.defaultStorage.removeValue(forKey: .init(key: key))
-            return
-        }
+//        guard let value else {
+//            self.defaultStorage[.init(key: key)] = nil
+////            self.defaultStorage.removeValue(forKey: .init(key: key))
+//            return
+//        }
         
         self.defaultStorage[.init(key: key)] = value
         

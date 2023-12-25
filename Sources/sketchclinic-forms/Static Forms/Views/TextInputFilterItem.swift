@@ -25,7 +25,11 @@ struct TextInputFilterItem<Key: TextFilterKey>: FilterItemView {
     }
     
     var body: some View {
-        TextInputView(placeholder: key.placeholder, text: filtersResult.binding(for: key, defaultValue: ""))
+        if key.inputType == .long {
+            LongTextInputView(title: key.placeholder, icon: nil, text: filtersResult.binding(for: key, defaultValue: ""))
+        } else {
+            TextInputView(placeholder: key.placeholder, text: filtersResult.binding(for: key, defaultValue: ""))
+        }
     }
 }
 

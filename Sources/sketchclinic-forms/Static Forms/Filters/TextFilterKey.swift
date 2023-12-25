@@ -10,10 +10,14 @@ import Foundation
 import SwiftUI
 import SketchClinicFoundation
 
+public enum TextFilterKeyInputType {
+    case long
+    case normal
+}
+
 public protocol TextFilterKey: FilterKey<String>, PresentableFilterKey {
     var placeholder: String { get }
-    var keyboardType: UIKeyboardType? { get }
-    var textAlignment: TextAlignment { get }
+    var inputType: TextFilterKeyInputType { get }
 }
 
 extension TextFilterKey {
@@ -33,10 +37,8 @@ extension TextFilterKey {
             key: self,
             viewForFilterType: TextInputFilterItem.self)
     }
+    
+    public var inputType: TextFilterKeyInputType {
+        .normal
+    }
 }
-
-extension TextFilterKey {    
-    public var keyboardType: UIKeyboardType? { .default }
-    public var textAlignment: TextAlignment { .leading }
-}
-

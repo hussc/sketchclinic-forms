@@ -11,17 +11,11 @@ import SketchClinicFoundation
 
 struct DateInputFilterItemView<Key: DateFilterKey>: FilterItemView {
     @EnvironmentObject private var filterResult: FilterResult
-    
-    @Environment(\.isRequired) var isRequired
-    @Environment(\.isEnabled) var isEnabled
-    @Environment(\.styles) var styles
 
     let key: Key
     let dateFormatter: DateFormatter
     
-    @State private var title: String?
-    @State private var currentDateString: String? = nil
-    @State private var showDatePicker = false
+    @State private var date: Date?
     
     init(key: Key) {
         self.key = key
@@ -35,12 +29,34 @@ struct DateInputFilterItemView<Key: DateFilterKey>: FilterItemView {
     }
     
     var body: some View {
-        DatePicker(selection: filterResult.binding(for: key, defaultValue: Date()), displayedComponents: .date) {
-            EmptyView()
+        VStack {
+            Button {
+                self.date = Date()
+            } label: {
+                Text("Select Date")
+            }
+            .buttonStyle(.secondary)
+            .isHidden(date != nil)
+            
+            DateInputView(date: filterResult.binding(for: key, defaultValue: date ?? Date()))
+                .isHidden(date == nil)
         }
-        .datePickerStyle(.wheel)
-        .tint(styles.accentColor)
-        .labelsHidden()
+        .animation(.bouncy, value: date)
+        .onChange(of: date, perform: { date in
+            if filterResult[key] != date {
+                filterResult.setValue(value: date, for: key)
+            }
+        })
+        .onReceive(filterResult.publisher(for: key), perform: { newValue in
+            if newValue != date {
+                self.date = newValue
+            }
+        })
+        .onAppear {
+            withAnimation(nil) {
+                self.date = filterResult[key]
+            }
+        }
     }
 }
 

@@ -17,7 +17,8 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/gonzalezreal/swift-markdown-ui", from: "2.0.2"),
-        .package(url: "https://github.com/hussc/sketchclinicfoundation", branch: "main")
+//        .package(url: "https://github.com/hussc/sketchclinicfoundation", branch: "main"),
+        .package(path: "../sketchclinic-foundation")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -25,7 +26,7 @@ let package = Package(
         .target(
             name: "SketchClinicForms", dependencies: [
                 .product(name: "MarkdownUI", package: "swift-markdown-ui"),
-                .product(name: "SketchClinicFoundation", package: "sketchclinicfoundation")
+                .product(name: "SketchClinicFoundation", package: "sketchclinic-foundation")
             ]),
         .testTarget(
             name: "SketchClinicFormsTests",

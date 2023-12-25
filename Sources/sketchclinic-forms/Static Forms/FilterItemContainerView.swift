@@ -9,31 +9,81 @@
 import SwiftUI
 import SketchClinicFoundation
 
-public struct FilterItemContainerView<FilterItem: View>: View {
+public struct FilterItemContainerView: ViewModifier {
     @State private var title: String?
     @State private var icon: String?
 
     @Environment(\.isRequired) var isRequired
     @Environment(\.accent) var accent
-
-    @ViewBuilder public var contentView: (() -> FilterItem)
     
-    public init(title: String? = nil, icon: String? = nil, contentView: @escaping () -> FilterItem) {
+    let isSelected: Bool
+    let onClear: (() -> Void)?
+    
+    public init(title: String? = nil,
+                icon: String? = nil,
+                isSelected: Bool = false,
+                onClear: (() -> Void)? = nil) {
         self.title = title
         self.icon = icon
-        self.contentView = contentView
+        self.isSelected = isSelected
+        self.onClear = onClear
     }
     
-    public var body: some View {
-        contentView()
-            .formBackground(title: title, icon: icon)
+    public func body(content: Content) -> some View {
+        VStack(alignment: .leading, spacing: Paddings.smallX) {
+            HStack {
+                if let icon, !(title?.trimmed().isEmpty ?? true) {
+                    Label(title ?? "", systemImage: icon)
+                        .font(.headlineFont)
+                        .foregroundColor(accent)
+                } else {
+                    Text(title ?? "")
+                        .font(.headlineFont)
+                        .foregroundColor(.textPrimary)
+                }
+
+                Spacer()
+                
+                if let onClear {
+                    Button {
+                        onClear()
+                    } label: {
+                        Image(systemName: "xmark.circle.fill")
+                            .font(.headlineFont.weight(.medium))
+                            .foregroundColor(.textPrimary)
+                    }
+                }
+            }
+
+            content
+        }
+        .modifier(CardBackgroundView(isSelected: isSelected))
+    }
+}
+
+extension FilterItemContainerView {
+    public struct CardBackgroundView: ViewModifier {
+        let isSelected: Bool
+        
+        @Environment(\.accent) var accent
+        
+        public func body(content: Content) -> some View {
+            HStack {
+                content
+                Spacer()
+            }
+            .padding(.horizontal, Paddings.medium)
+            .padding(.vertical, Paddings.smallX)
+            .background {
+                RoundedRectangle(cornerRadius: 6)
+                    .foregroundColor(isSelected ? accent.opacity(0.1) : .backgroundSecondary)
+            }
+        }
     }
 }
 
 extension View {
     func wrappedInFilterContainer(title: String? = nil, icon: String? = nil) -> some View {
-        FilterItemContainerView(title: title, icon: icon) {
-            self
-        }
+        self.modifier(FilterItemContainerView(title: title, icon: icon))
     }
 }

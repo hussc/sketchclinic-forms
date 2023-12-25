@@ -27,6 +27,7 @@ public struct FormBackgroundViewModifier: ViewModifier {
             HStack {
                 if let icon, !(title?.trimmed().isEmpty ?? true) {
                     Label(title ?? "", systemImage: icon)
+                        .labelStyle(.accentIcon)
                         .font(.headlineFont)
                         .foregroundColor(accent)
                 } else {
@@ -54,4 +55,23 @@ extension View {
     TextField("Name", text: .constant("Hello"))
         .formBackground(title: "Name")
         .accent(.red)
+        .cardIndentionStyle(.tertiary)
 }
+
+struct AccentIconLabelStyle: LabelStyle {
+    @Environment(\.accent) var accent
+
+    func makeBody(configuration: Configuration) -> some View {
+        HStack {
+            configuration.icon
+                .foregroundColor(accent)
+            configuration.title
+                .foregroundColor(.textPrimary)
+        }
+    }
+}
+
+extension LabelStyle where Self == AccentIconLabelStyle {
+    static var accentIcon: AccentIconLabelStyle { AccentIconLabelStyle() }
+}
+

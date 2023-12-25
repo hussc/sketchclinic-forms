@@ -11,6 +11,10 @@ import SketchClinicFoundation
 
 public struct DefaultFilterViewDescriptor<Key: FilterKey, FilterView: FilterItemView<Key>>: FilterViewDesciptor {
     
+    @EnvironmentObject var filtersResult: FilterResult
+    
+    @State private var hasValue = false
+    
     public let title: String?
     public let iconName: String?
     public let key: Key
@@ -22,6 +26,15 @@ public struct DefaultFilterViewDescriptor<Key: FilterKey, FilterView: FilterItem
     
     @ViewBuilder @MainActor public var body: some View {
         viewForFilter
-            .wrappedInFilterContainer(title: title, icon: iconName)
+            .onReceive(filtersResult.publisher(for: key), perform: { newValue in
+                hasValue = newValue != nil
+            })
+            .onAppear {
+                hasValue = filtersResult[key] != nil
+            }
+            .modifier(FilterItemContainerView(title: title, icon: iconName, isSelected: hasValue) {
+                filtersResult.setValue(value: nil, for: key)
+                hasValue = false
+            })
     }
 }

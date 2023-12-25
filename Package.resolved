@@ -37,15 +37,6 @@
       }
     },
     {
-      "identity" : "sketchclinicfoundation",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/hussc/sketchclinicfoundation",
-      "state" : {
-        "branch" : "main",
-        "revision" : "55bba69c0e8e6384755208e2a8cd2cbf15076d8e"
-      }
-    },
-    {
       "identity" : "swift-collections",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-collections.git",
