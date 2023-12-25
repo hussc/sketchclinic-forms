@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/onevcat/Kingfisher.git",
       "state" : {
-        "revision" : "277f1ab2c6664b19b4a412e32b094b201e2d5757",
-        "version" : "7.10.0"
+        "revision" : "add0a87ec4e31e2ca2a0b2085f0559201e4f5918",
+        "version" : "7.10.1"
       }
     },
     {
@@ -37,12 +37,21 @@
       }
     },
     {
+      "identity" : "sketchclinicfoundation",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/hussc/sketchclinicfoundation",
+      "state" : {
+        "branch" : "main",
+        "revision" : "6bb3d8c39dded9808499e217a86686d59ea0ee3c"
+      }
+    },
+    {
       "identity" : "swift-collections",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-collections.git",
       "state" : {
-        "revision" : "a902f1823a7ff3c9ab2fba0f992396b948eda307",
-        "version" : "1.0.5"
+        "revision" : "d029d9d39c87bed85b1c50adee7c41795261a192",
+        "version" : "1.0.6"
       }
     },
     {
