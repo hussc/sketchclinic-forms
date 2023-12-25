@@ -34,6 +34,7 @@ public struct FilterItemContainerView: ViewModifier {
             HStack {
                 if let icon, !(title?.trimmed().isEmpty ?? true) {
                     Label(title ?? "", systemImage: icon)
+                        .labelStyle(.accentIcon)
                         .font(.headlineFont)
                         .foregroundColor(accent)
                 } else {
@@ -41,23 +42,11 @@ public struct FilterItemContainerView: ViewModifier {
                         .font(.headlineFont)
                         .foregroundColor(.textPrimary)
                 }
-
-                Spacer()
-                
-                if let onClear {
-                    Button {
-                        onClear()
-                    } label: {
-                        Image(systemName: "xmark.circle.fill")
-                            .font(.headlineFont.weight(.medium))
-                            .foregroundColor(.textPrimary)
-                    }
-                }
             }
 
             content
         }
-        .modifier(CardBackgroundView(isSelected: isSelected))
+        .cardBackground()
     }
 }
 
