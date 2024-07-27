@@ -8,6 +8,8 @@
 import Foundation
 import SwiftUI
 import SketchClinicFoundation
+
+#if canImport(MarkdownUI)
 import MarkdownUI
 
 extension Theme {
@@ -308,3 +310,4 @@ Autoconverted link https://github.com/nodeca/pica (enable linkify to see)
 ![Minion](https://placekitten.com/1000/1000)
 ![Stormtroopocat](https://placekitten.com/800/800)
 """
+#endif

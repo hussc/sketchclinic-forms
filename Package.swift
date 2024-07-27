@@ -16,7 +16,6 @@ let package = Package(
             targets: ["SketchClinicForms"])
     ],
     dependencies: [
-        .package(url: "https://github.com/gonzalezreal/swift-markdown-ui", from: "2.0.2"),
         .package(url: "https://github.com/hussc/sketchclinicfoundation", branch: "main")
     ],
     targets: [
@@ -24,7 +23,6 @@ let package = Package(
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "SketchClinicForms", dependencies: [
-                .product(name: "MarkdownUI", package: "swift-markdown-ui"),
                 .product(name: "SketchClinicFoundation", package: "sketchclinicfoundation")
             ]),
         .testTarget(

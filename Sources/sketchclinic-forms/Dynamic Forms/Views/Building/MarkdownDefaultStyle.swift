@@ -7,6 +7,8 @@
 
 import SwiftUI
 import SketchClinicFoundation
+
+#if canImport(MarkdownUI)
 import MarkdownUI
 
 extension FontProperties.Family {
@@ -133,3 +135,4 @@ extension Theme {
                 .relativeFrame(minWidth: .em(1.5), alignment: .trailing)
         }
 }
+#endif
